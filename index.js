@@ -19,6 +19,58 @@ On the door is a handwritten sign.`;
   process.exit();
 }
 
+//--------------------------------- TABI + OLIVES CODE ------------------------------------------------
+
+let player {
+  name : [],
+  inventory : [],
+  currentRoom : [],
+  susPoints : []
+
+  //moveRoom : function() {}
+}
+
+
+
+const rooms = {
+'radio bean' : radioBean,
+'three needs' : threeNeeds,
+'pool room' : threeNeedsPoolRoom,
+'food cart' : foodCart,
+'finnegans' : finnegans,
+'deli' : deli126,
+'deli 126' : deli126,
+'red square' : redSquare,
+'kkd' : kkd,
+'kountry kart deli' : kkd,
+'jps' : jps,
+}
+
+class Room {
+constructor(name, description, inventory, north, east, south, west) {
+this.name = name
+this.description = description 
+this.inventory = inventory
+this.north = north || null
+this.east = east || null
+this.south = south || null
+this.west = west || null
+}
+//will need "if" drop item - add to inventory
+}
+
+let userAction = {
+move: ['go', 'walk']
+use : ['use', 'play', 'get', 'drink', 'eat'] //tip?
+take : ['take', 'grab', 'order']
+open : ['open', 'unlock']
+drop : ['drop']
+}
+
+class 
+
+
+
 
 
 /*
