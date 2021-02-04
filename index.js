@@ -64,7 +64,7 @@ class RoomClass {
   }
   //will need "if" drop item - add to inventory
 }
-
+const room = new InvObjectsClass(threeNeeds, "The three needs blah blah blah", [water, shot], threeNeedsPoolRoom, null, null, west)
 
 //  user actions look table object
 
