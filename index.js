@@ -10,17 +10,23 @@ function ask(questionText) {
 start();
 
 async function start() {
-  const welcomeMessage = `182 Main St.
-You are standing on Main Street between Church and South Winooski.
-There is a door here. A keypad sits on the handle.
-On the door is a handwritten sign.`;
+  const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n You meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... \n\nDo you want to continue your night out?`;
   let answer = await ask(welcomeMessage);
-  console.log('Now write your code to make this work!');
-  process.exit();
+
+  if (answer === 'no'){
+    console.log('Enjoy your lame night in!');
+    process.exit();
+  } else {
+    console.log('You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the north a familiar sight.....')
+    let firstDirection = await ask("Where would you like to go?")
+    console.log(firstDirection);
+    process.exit();
+  }
 }
 
 //--------------------------------- TABI + OLIVES CODE ------------------------------------------------
 
+//  start of player object... 
 let player {
   name : [],
   inventory : [],
@@ -30,8 +36,7 @@ let player {
   //moveRoom : function() {}
 }
 
-
-
+// room lookup table object
 const rooms = {
 'radio bean' : radioBean,
 'three needs' : threeNeeds,
@@ -46,7 +51,8 @@ const rooms = {
 'jps' : jps,
 }
 
-class Room {
+// Room class. including name, description inventory, directionals and will have actions available later
+class RoomClass {
 constructor(name, description, inventory, north, east, south, west) {
 this.name = name
 this.description = description 
@@ -59,6 +65,8 @@ this.west = west || null
 //will need "if" drop item - add to inventory
 }
 
+//  user actions look table object
+
 let userAction = {
 move: ['go', 'walk']
 use : ['use', 'play', 'get', 'drink', 'eat'] //tip?
@@ -67,13 +75,55 @@ open : ['open', 'unlock']
 drop : ['drop']
 }
 
-class 
+// inventory look up table
+let invObjects = {
+  'map': map,
+  'water': water,
+  'sparkling water': sparkWater,
+  'shot': alcohol,
+  'food': food,
+  'sandwich': prize
+}
+
+//  inventory class
+class InvObjectsClass{
+  constructor(name, description, startingRoom, currentRoom , action) {
+    this.name = name
+    this.description = description
+    this.startingRoom = startingRoom
+    this.currentRoom = currentRoom || startingRoom // may need an inventory room for objects to be in... 
+    this.action = action || [] // action array
+  }
+  
+}
+
+const map = new InvObjectsClass(map, "this is a map of Burlington's downtown area", threeNeedsPoolRoom, threeNeedsPoolRoom, [use, take, drop])
+
+
+//  need another async (?) play function... that 
+//  1)takes a user input 
+//  2) sanitizes it into multiple parts.. 
+  // one part will need action = userInputAction
+  // second part will need to be direction/object = userInputObject
+//  3) jump into conditional ifs based on userInput.. where we do what the user said or... console.log(i dont know what your talking about)
+//  4) at end want to jump to very top of play function...
+
 
 
 
 
 
 /*
+
+//  structure hypothetical
+
+//  print inventory if user enters i
+let userInput = await ask(What do you want to do...);
+
+if (userInput === 'i'){
+  console.log(player.inventory);
+}
+
 
 - Intro: its the year XXXX its your first time out with your friends since covid ended......... said one drink , you finish.. do you want to continue your night out? Y/N
 - Radio bean [optional, could just start outside]
