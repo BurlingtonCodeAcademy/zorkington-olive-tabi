@@ -64,6 +64,7 @@ class RoomClass {
   }
   //will need "if" drop item - add to inventory
 }
+const room = new InvObjectsClass(threeNeeds, "The three needs blah blah blah", [water, shot], threeNeedsPoolRoom, null, null, west)
 
 //  user actions look table object
 
@@ -97,7 +98,7 @@ class InvObjectsClass {
 
 }
 
-const map = new InvObjectsClass(map, "this is a map of Burlington's downtown area", threeNeedsPoolRoom, undefined, [use, take, drop])
+const mapObj = new InvObjectsClass(map, "this is a map of Burlington's downtown area", threeNeedsPoolRoom, undefined, [use, take, drop])
 
 
 //  need another async (?) play function... that 
