@@ -141,8 +141,8 @@ const radioBean = new RoomClass(
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
-  "three needs": threeNeeds,
-  "pool room": threeNeedsPoolRoom,
+  "threeneeds" : threeNeeds,
+  "poolroom": threeNeedsPoolRoom,
   //   'food cart': foodCart,
   //   'finnegans': finnegans,
   //   'deli': deli126,
