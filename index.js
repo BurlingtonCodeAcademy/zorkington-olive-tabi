@@ -25,7 +25,7 @@ async function start() {
     );
     let firstDirection = await ask("Where would you like to go?");
     console.log(firstDirection);
-    player.currentRoom = "Radio Bean";
+    player.currentRoom = "radio bean";
     return play();
   }
 }
@@ -67,7 +67,6 @@ class InvObjectsClass {
   }
 }
 
-
 //  user actions look table object
 
 let userAction = {
@@ -78,44 +77,50 @@ let userAction = {
   drop: ["drop"],
 };
 
-
-
 //  objects... maybe cant include locations because of variable shadowing
 //  need to define things in objects AFTER we define them... maybe dont need these pieces.. will need to decide
 const water = new InvObjectsClass(
-    "water",
-    "water description...",
-    undefined,
-    undefined,
-    []
-  );
-  const shot = new InvObjectsClass(
-    "shot",
-    "shot description...",
-    undefined,
-    undefined,
-    []
-  );
+  "water",
+  "water description...",
+  undefined,
+  undefined,
+  []
+);
+const shot = new InvObjectsClass(
+  "shot",
+  "shot description...",
+  undefined,
+  undefined,
+  []
+);
 
-  const map = new InvObjectsClass(
-    "map",
-    "map description...",
-    undefined,
-    undefined,
-    []
-  );
+const map = new InvObjectsClass(
+  "map",
+  "map description...",
+  undefined,
+  undefined,
+  []
+);
 
 // inventory look up table
 let invObjects = {
-   'map': map,
-    'water': water,
-    //   'sparkling water': sparkWater,
-    'shot': shot,
-    //   'food': food,
-    //   'sandwich': prize
-  };
+  map: map,
+  water: water,
+  //   'sparkling water': sparkWater,
+  shot: shot,
+  //   'food': food,
+  //   'sandwich': prize
+};
 
-
+const churchStreet = new RoomClass(
+  "church street",
+  "Church street stretches out ahead of you to the north, to the west you see a food cart.  There are people everywhere.",
+  [], 
+  null,
+  null,
+  null,
+  null
+);
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
   "The three needs pool room you see a bar, a pool table, and on one of tables a map.",
@@ -129,28 +134,28 @@ const threeNeeds = new RoomClass(
   "threeNeeds",
   "The three needs blah blah blah",
   [],
-  threeNeedsPoolRoom,
+  null,
   null,
   null,
   null
 );
+
 const radioBean = new RoomClass(
   "the radio bean",
   "The radio bean",
   [invObjects.water, invObjects.shot],
-  threeNeeds,
+  churchStreet,
   null,
   null,
   null
 );
-
-
 
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
   "threeneeds": threeNeeds,
   "threeneeds pool room": threeNeedsPoolRoom,
+  "church street": churchStreet,
   //   'food cart': foodCart,
   //   'finnegans': finnegans,
   //   'deli': deli126,
@@ -158,10 +163,10 @@ const rooms = {
   //   'red square': redSquare,
   //   'kkd': kkd,
   //   'kountry kart deli': kkd,
-  //   'jps': jps
+  //   'jps': jps,
+  //  'pearl st. hill': hillUp,
+  //  'church st.': churchStreet  // do we have to have multiple church streets... like church street block 1, or church street block 2 so that we can keep going up the path?
 };
-
-
 
 // ------------------------------------- PLAN ------------------------------------------------------
 //  need another async (?) play function... that
@@ -199,7 +204,9 @@ async function play() {
         player.currentRoom = roomToNorth.name;
         console.log(roomToNorth.description);
         console.log(`changing currentRoom to ${roomToNorth.name}`);
-      } else  {console.log("you can't go that way");};
+      } else {
+        console.log("you can't go that way");
+      }
       // EAST
     } else if (inputObject.toLowerCase() === "east") {
       if (rooms[player.currentRoom.toLowerCase()].east) {
@@ -208,7 +215,9 @@ async function play() {
         player.currentRoom = roomToEast.name;
         console.log(roomToEast.description);
         console.log(`changing currentRoom to ${roomToEast.name}`);
-      } else  {console.log("you can't go that way");};
+      } else {
+        console.log("you can't go that way"); 
+      }
       // South
     } else if (inputObject.toLowerCase() === "south") {
       if (rooms[player.currentRoom.toLowerCase()].south) {
@@ -217,22 +226,26 @@ async function play() {
         player.currentRoom = roomToSouth.name;
         console.log(roomToSouth.description);
         console.log(`changing currentRoom to ${roomToSouth.name}`);
-      } else  {console.log("you can't go that way");};
+      } else {
+        console.log("you can't go that way");
+      }
       // West
-    } else if (inputObject.toLowerCase() === "west"){
+    } else if (inputObject.toLowerCase() === "west") {
       if (rooms[player.currentRoom.toLowerCase()].west) {
         // this is to find rooms northern room connection
         roomToWest = rooms[player.currentRoom.toLowerCase()].west;
         player.currentRoom = roomToWest.name;
         console.log(roomToWest.description);
         console.log(`changing currentRoom to ${roomToWest.name}`);
-      } else  {console.log("you can't go that way");};
+      } else {
+        console.log("you can't go that way");
+      }
     } // could add a "i dont understand here" otherwise will keep looping..
-  } else {console.log("you can't do that");}  
+  } else {
+    console.log("you can't do that");
+  }
   return play();
 }
-
-
 
 /*
 
@@ -249,4 +262,3 @@ if (userInput === 'i'){
 }
 
 */
-
