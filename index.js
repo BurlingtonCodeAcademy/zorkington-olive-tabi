@@ -261,14 +261,32 @@ const churchStreetFour = new RoomClass(
 
 
 
-
-
-
-
-
 //  manually modifying/adding room connections
 churchStreet.east = threeNeeds;
-threeNeeds.south = churchStreet;
+churchStreetOne.north = churchStreetTwo;
+churchStreetOne.east = threeNeeds;
+//threeNeeds.south = churchStreetOne;
+threeNeeds.east = threeNeedsPoolRoom;
+threeNeeds.west = churchStreetOne;
+threeNeedsPoolRoom.west = threeNeeds;
+churchStreetTwo.north = churchStreetThree;
+churchStreetTwo.south = churchStreetOne;
+churchStreetTwo.east = foodCart;
+foodCart.west = churchStreetTwo;
+churchStreetThree.south = churchStreetTwo;
+churchStreetThree.east = finnegans;
+churchStreetThree.west = deli126;
+churchStreetThree.north = churchStreetFour;
+finnegans.west = churchStreetThree;
+deli126.east = churchStreetThree;
+churchStreetFour.south = churchStreetThree;
+churchStreetFour.east = redSquare;
+churchStreetFour.west = kkd;
+redSquare.west = churchStreetFour;
+kkd.east = churchStreetFour;
+
+
+
 
 // room lookup table object
 const rooms = {
