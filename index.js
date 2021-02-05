@@ -71,7 +71,7 @@ class InvObjectsClass {
 
 let userAction = {
   move: ["go", "walk"],
-  use: ["use", "play", "get", "drink", "eat"], //tip?
+  use: ["use", "play", "get", "drink", "eat", "order"], //tip?
   take: ["take", "grab", "order"],
   open: ["open", "unlock"],
   drop: ["drop"],
@@ -363,7 +363,7 @@ async function play() {
     } else if (inputObject.toLowerCase() === "south") {
       if (rooms[player.currentRoom.toLowerCase()].south) {
         // this is to find rooms northern room connection
-        roomToSouth = rooms[player.currentRoom.toLowerCase()].south;ß
+        roomToSouth = rooms[player.currentRoom.toLowerCase()].south;
         player.currentRoom = roomToSouth.name;
         console.log(roomToSouth.description);
         // console.log(`changing currentRoom to ${roomToSouth.name}`);
@@ -382,17 +382,37 @@ async function play() {
         console.log("you can't go that way");
       }
     } // could add a "i dont understand here" otherwise will keep looping..
+  //  Actions! this doesnt work yet!!!
+  } else if (userAction.use.includes(inputAction)){
+    // look at object
+    objectToUse = invObjects[inputObject.toLowerCase()].name;
+    currentRoomsInventory = rooms[player.currentRoom.toLowerCase()].inventory
+    
+    if (currentRoomsInventory.forEach(objectThing => {
+      objectThing.name  === inputObject})){
+     console.log(objectToUse.description)
+      
+      }else {
+      // console.log(rooms[player.currentRoom.toLowerCase()].inventory[objectToUse]);
+      console.log(currentRoomsInventory.includes(invObjects[inputObject].name));
+      console.log(invObjects[inputObject].name)
+      console.log(currentRoomsInventory)
+    }
+    
   } else {
     console.log("you can't do that");
   }
   return play();
 
-//  Actions!
+
+
 
 
 
 
 }
+
+
 
 
 
