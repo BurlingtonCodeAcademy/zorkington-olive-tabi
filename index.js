@@ -344,7 +344,7 @@ async function play() {
         roomToNorth = rooms[player.currentRoom.toLowerCase()].north;
         player.currentRoom = roomToNorth.name;
         console.log(roomToNorth.description);
-        console.log(`changing currentRoom to ${roomToNorth.name}`);
+        // console.log(`changing currentRoom to ${roomToNorth.name}`);
       } else {
         console.log("you can't go that way");
       }
@@ -355,7 +355,7 @@ async function play() {
         roomToEast = rooms[player.currentRoom.toLowerCase()].east;
         player.currentRoom = roomToEast.name;
         console.log(roomToEast.description);
-        console.log(`changing currentRoom to ${roomToEast.name}`);
+        // console.log(`changing currentRoom to ${roomToEast.name}`);
       } else {
         console.log("you can't go that way"); 
       }
@@ -366,7 +366,7 @@ async function play() {
         roomToSouth = rooms[player.currentRoom.toLowerCase()].south;ß
         player.currentRoom = roomToSouth.name;
         console.log(roomToSouth.description);
-        console.log(`changing currentRoom to ${roomToSouth.name}`);
+        // console.log(`changing currentRoom to ${roomToSouth.name}`);
       } else {
         console.log("you can't go that way");
       }
@@ -377,7 +377,7 @@ async function play() {
         roomToWest = rooms[player.currentRoom.toLowerCase()].west;
         player.currentRoom = roomToWest.name;
         console.log(roomToWest.description);
-        console.log(`changing currentRoom to ${roomToWest.name}`);
+        // console.log(`changing currentRoom to ${roomToWest.name}`);
       } else {
         console.log("you can't go that way");
       }
@@ -386,6 +386,12 @@ async function play() {
     console.log("you can't do that");
   }
   return play();
+
+//  Actions!
+
+
+
+
 }
 
 
