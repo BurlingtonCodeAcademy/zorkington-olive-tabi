@@ -142,14 +142,14 @@ const radioBean = new RoomClass(
   "the radio bean",
   "The radio bean",
   [],
-  churchStreet,
+  null,
   null,
   null,
   null
 );
 
 const churchStreetOne = new RoomClass(
-  "church street",
+  "church street one",
   "Church street stretches out ahead of you to the north, to the east you see the three needs.  There doesn't seem to be a line.",
   [], 
   null,
@@ -231,7 +231,7 @@ const kkd = new RoomClass(
 
 const churchStreetTwo = new RoomClass(
   "church street two",
-  "Church street stretches out ahead of you to the north and south, to the west you see a food cart.  There are people everywhere.",
+  "Church street stretches out ahead of you to the north and south, and to the east you see a food cart.  There are people everywhere.",
   [], 
   null,
   null,
@@ -250,7 +250,7 @@ const churchStreetThree = new RoomClass(
 );
 
 const churchStreetFour = new RoomClass(
-  "church street three",
+  "church street four",
   "Church street stretches out ahead of you to the north and south.  To the east red square and West is kkd.",
   [], 
   null,
@@ -260,26 +260,50 @@ const churchStreetFour = new RoomClass(
 );
 
 
+
 //  manually modifying/adding room connections
+radioBean.north = churchStreetOne;
+churchStreetOne.north = churchStreetTwo;
 churchStreetOne.east = threeNeeds;
-threeNeeds.south = churchStreet;
+//threeNeeds.south = churchStreetOne;
+threeNeeds.east = threeNeedsPoolRoom;
+threeNeeds.west = churchStreetOne;
+threeNeedsPoolRoom.west = threeNeeds;
+churchStreetTwo.north = churchStreetThree;
+churchStreetTwo.south = churchStreetOne;
+churchStreetTwo.east = foodCart;
+foodCart.west = churchStreetTwo;
+churchStreetThree.south = churchStreetTwo;
+churchStreetThree.east = finnegans;
+churchStreetThree.west = deli126;
+churchStreetThree.north = churchStreetFour;
+finnegans.west = churchStreetThree;
+deli126.east = churchStreetThree;
+churchStreetFour.south = churchStreetThree;
+churchStreetFour.east = redSquare;
+churchStreetFour.west = kkd;
+redSquare.west = churchStreetFour;
+kkd.east = churchStreetFour;
+
+
+
 
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
-  "church street one": churchStreetOne // N = church 2, E = needs
+  "church street one": churchStreetOne, // N = church 2, E = needs
   "threeneeds": threeNeeds, // E = pool room, W = church street one
   "threeneeds pool room": threeNeedsPoolRoom,
-  "church street 2": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
+  "church street two": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
     'food cart': foodCart, // W = church street 2, 
-    "church street 3": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
+    "church street three": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
     'finnegans': finnegans, // W = church street 3
     'deli': deli126, // E = church street 3
     'deli 126': deli126, // E = church street 3
-    'church street 4': churchStreetFour, // E = red square, W = kkd, S = church street 3
+    'church street four': churchStreetFour, // E = red square, W = kkd, S = church street 3
     'red square': redSquare, // W = church street 4
     'kkd': kkd, // E = church street 4
-    'kountry kart deli': kkd, // same as above
+    'kountry kart deli': kkd // same as above
     // 'jps': jps, // if we get it all working and want to add it later we can
     //  'pearl st. hill': hillUp, // for later
   //  need to think about drunk people room...
@@ -364,10 +388,11 @@ async function play() {
   return play();
 }
 
+
+
+
+
 /*
-
-
-
 
 //  structure hypothetical
 
