@@ -121,7 +121,7 @@ undefined,
 
 const prize = new InvObjectsClass(
   "sandwich",
-  "As the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob.",
+  "It's hot and good and will keep you alive....",
 undefined,
 undefined,
 []
@@ -148,9 +148,9 @@ const radioBean = new RoomClass(
   null
 );
 
-const churchStreet = new RoomClass(
+const churchStreetOne = new RoomClass(
   "church street",
-  "Church street stretches out ahead of you to the north, to the west you see a food cart.  There are people everywhere.",
+  "Church street stretches out ahead of you to the north, to the east you see the three needs.  There doesn't seem to be a line.",
   [], 
   null,
   null,
@@ -210,9 +210,56 @@ const deli126 = new RoomClass(
 
 const redSquare = new RoomClass( // maybe include a die scenario here?
   "red square",
-  "The bass is bumping and the night is getting late... is anyone in here even 21??  ",
+  "The bass is bumping and the night is getting late... is anyone in here even 21?? The bar lies ahead... ",
+  [shot],
+  null,
+  null,
+  null,
+  null
 
-)
+);
+
+const kkd = new RoomClass(
+  "kountry kart deli",
+  "As the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob",
+  [prize, water],
+  null,
+  null,
+  null,
+  null
+);
+
+const churchStreetTwo = new RoomClass(
+  "church street two",
+  "Church street stretches out ahead of you to the north and south, to the west you see a food cart.  There are people everywhere.",
+  [], 
+  null,
+  null,
+  null,
+  null
+);
+
+const churchStreetThree = new RoomClass(
+  "church street three",
+  "Church street stretches out ahead of you to the north and south.  To the east Finnegans and West is deli 126.",
+  [], 
+  null,
+  null,
+  null,
+  null
+);
+
+const churchStreetFour = new RoomClass(
+  "church street three",
+  "Church street stretches out ahead of you to the north and south.  To the east red square and West is kkd.",
+  [], 
+  null,
+  null,
+  null,
+  null
+);
+
+
 
 
 
@@ -226,19 +273,22 @@ threeNeeds.south = churchStreet;
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
-  "threeneeds": threeNeeds,
+  "church street one": churchStreetOne // N = church 2, E = needs
+  "threeneeds": threeNeeds, // E = pool room, W = church street one
   "threeneeds pool room": threeNeedsPoolRoom,
-  "church street": churchStreet,
-    'food cart': foodCart,
-    'finnegans': finnegans,
-    'deli': deli126,
-    'deli 126': deli126,
-    'red square': redSquare,
-    'kkd': kkd,
-    'kountry kart deli': kkd,
-    'jps': jps,
-   'pearl st. hill': hillUp,
-   'church st.': churchStreet  // do we have to have multiple church streets... like church street block 1, or church street block 2 so that we can keep going up the path?
+  "church street 2": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
+    'food cart': foodCart, // W = church street 2, 
+    "church street 3": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
+    'finnegans': finnegans, // W = church street 3
+    'deli': deli126, // E = church street 3
+    'deli 126': deli126, // E = church street 3
+    'church street 4': churchStreetFour, // E = red square, W = kkd, S = church street 3
+    'red square': redSquare, // W = church street 4
+    'kkd': kkd, // E = church street 4
+    'kountry kart deli': kkd, // same as above
+    // 'jps': jps, // if we get it all working and want to add it later we can
+    //  'pearl st. hill': hillUp, // for later
+  //  need to think about drunk people room...
 };
 
 // ------------------------------------- PLAN ------------------------------------------------------
