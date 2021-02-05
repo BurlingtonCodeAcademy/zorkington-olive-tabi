@@ -97,12 +97,20 @@ const water = new InvObjectsClass(
     []
   );
 
+  const map = new InvObjectsClass(
+    "map",
+    "map description...",
+    undefined,
+    undefined,
+    []
+  );
+
 // inventory look up table
 let invObjects = {
-    //   'map': map,
-    water: water,
+   'map': map,
+    'water': water,
     //   'sparkling water': sparkWater,
-    shot: shot,
+    'shot': shot,
     //   'food': food,
     //   'sandwich': prize
   };
@@ -110,8 +118,8 @@ let invObjects = {
 
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
-  "The three needs pool room blah blah blah",
-  [],
+  "The three needs pool room you see a bar, a pool table, and on one of tables a map.",
+  [map, water, shot],
   null,
   null,
   null,
@@ -141,8 +149,8 @@ const radioBean = new RoomClass(
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
-  "three needs": threeNeeds,
-  "pool room": threeNeedsPoolRoom,
+  "threeneeds": threeNeeds,
+  "threeneeds pool room": threeNeedsPoolRoom,
   //   'food cart': foodCart,
   //   'finnegans': finnegans,
   //   'deli': deli126,
@@ -182,6 +190,8 @@ async function play() {
 
     // if user wants to move lets move
   } else if (userAction.move.includes(inputAction)) {
+    // conditional directions
+    // NORTH
     if (inputObject.toLowerCase() === "north") {
       if (rooms[player.currentRoom.toLowerCase()].north) {
         // this is to find rooms northern room connection
@@ -190,14 +200,41 @@ async function play() {
         console.log(roomToNorth.description);
         console.log(`changing currentRoom to ${roomToNorth.name}`);
       } else  {console.log("you can't go that way");};
+      // EAST
     } else if (inputObject.toLowerCase() === "east") {
+      if (rooms[player.currentRoom.toLowerCase()].east) {
+        // this is to find rooms northern room connection
+        roomToEast = rooms[player.currentRoom.toLowerCase()].east;
+        player.currentRoom = roomToEast.name;
+        console.log(roomToEast.description);
+        console.log(`changing currentRoom to ${roomToEast.name}`);
+      } else  {console.log("you can't go that way");};
+      // South
     } else if (inputObject.toLowerCase() === "south") {
-    } else {
-    }
+      if (rooms[player.currentRoom.toLowerCase()].south) {
+        // this is to find rooms northern room connection
+        roomToSouth = rooms[player.currentRoom.toLowerCase()].south;
+        player.currentRoom = roomToSouth.name;
+        console.log(roomToSouth.description);
+        console.log(`changing currentRoom to ${roomToSouth.name}`);
+      } else  {console.log("you can't go that way");};
+      // West
+    } else if (inputObject.toLowerCase() === "west"){
+      if (rooms[player.currentRoom.toLowerCase()].west) {
+        // this is to find rooms northern room connection
+        roomToWest = rooms[player.currentRoom.toLowerCase()].west;
+        player.currentRoom = roomToWest.name;
+        console.log(roomToWest.description);
+        console.log(`changing currentRoom to ${roomToWest.name}`);
+      } else  {console.log("you can't go that way");};
+    } // could add a "i dont understand here" otherwise will keep looping..
   } else {console.log("you can't do that");}  
   return play();
 }
 /*
+
+
+
 
 //  structure hypothetical
 
