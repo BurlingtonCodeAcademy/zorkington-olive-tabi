@@ -260,14 +260,8 @@ const churchStreetFour = new RoomClass(
 );
 
 
-
-
-
-
-
-
 //  manually modifying/adding room connections
-churchStreet.east = threeNeeds;
+churchStreetOne.east = threeNeeds;
 threeNeeds.south = churchStreet;
 
 // room lookup table object
