@@ -131,11 +131,22 @@ undefined,
 let invObjects = {
   map: map,
   water: water,
+  still: water,
   'sparkling water': sparkWater,
   shot: shot,
   'food': food,
   'sandwich': prize
 };
+
+const radioBean = new RoomClass(
+  "the radio bean",
+  "The radio bean",
+  [],
+  churchStreet,
+  null,
+  null,
+  null
+);
 
 const churchStreet = new RoomClass(
   "church street",
@@ -146,6 +157,17 @@ const churchStreet = new RoomClass(
   null,
   null
 );
+
+const threeNeeds = new RoomClass(
+  "threeNeeds",
+  "The three needs blah blah blah",
+  [water, shot],
+  null,
+  null,
+  null,
+  null
+);
+
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
   "The three needs pool room you see a bar, a pool table, and on one of tables a map.",
@@ -155,25 +177,47 @@ const threeNeedsPoolRoom = new RoomClass(
   null,
   null
 );
-const threeNeeds = new RoomClass(
-  "threeNeeds",
-  "The three needs blah blah blah",
-  [],
+
+const foodCart = new RoomClass(
+  "food cart",
+  "Hmmm... the smells of sweet snacks waft your way. The guy working the cart wants to know if you want to order anything.",
+  [water, food],
   null,
   null,
   null,
   null
 );
 
-const radioBean = new RoomClass(
-  "the radio bean",
-  "The radio bean",
-  [invObjects.water, invObjects.shot],
-  churchStreet,
+const finnegans = new RoomClass(
+  "finnegans",
+  "Its a little dark, its a little smelly, but the beer is good and the companies even better.  Not much to do here but head to the bar.....",
+  [shot],
+  null,
   null,
   null,
   null
 );
+
+const deli126 = new RoomClass(
+  "deli",
+  "This place seems a little fancier than most.  When you approach the bar the bar tender asks if you want some water... sparkling or still",
+  [shot, water, sparkWater],
+  null,
+  null,
+  null,
+  null
+);
+
+const redSquare = new RoomClass( // maybe include a die scenario here?
+  "red square",
+  "The bass is bumping and the night is getting late... is anyone in here even 21??  ",
+
+)
+
+
+
+
+
 
 //  manually modifying/adding room connections
 churchStreet.east = threeNeeds;
@@ -185,16 +229,16 @@ const rooms = {
   "threeneeds": threeNeeds,
   "threeneeds pool room": threeNeedsPoolRoom,
   "church street": churchStreet,
-  //   'food cart': foodCart,
-  //   'finnegans': finnegans,
-  //   'deli': deli126,
-  //   'deli 126': deli126,
-  //   'red square': redSquare,
-  //   'kkd': kkd,
-  //   'kountry kart deli': kkd,
-  //   'jps': jps,
-  //  'pearl st. hill': hillUp,
-  //  'church st.': churchStreet  // do we have to have multiple church streets... like church street block 1, or church street block 2 so that we can keep going up the path?
+    'food cart': foodCart,
+    'finnegans': finnegans,
+    'deli': deli126,
+    'deli 126': deli126,
+    'red square': redSquare,
+    'kkd': kkd,
+    'kountry kart deli': kkd,
+    'jps': jps,
+   'pearl st. hill': hillUp,
+   'church st.': churchStreet  // do we have to have multiple church streets... like church street block 1, or church street block 2 so that we can keep going up the path?
 };
 
 // ------------------------------------- PLAN ------------------------------------------------------
