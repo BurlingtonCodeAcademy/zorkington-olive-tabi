@@ -75,20 +75,21 @@ let userAction = {
   take: ["take", "grab", "order"],
   open: ["open", "unlock"],
   drop: ["drop"],
+  examine : ["examine"]
 };
 
 //  objects... maybe cant include locations because of variable shadowing
 //  need to define things in objects AFTER we define them... maybe dont need these pieces.. will need to decide
 const water = new InvObjectsClass(
   "water",
-  "water description...",
+  "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 15 sustenance points.",
   undefined,
   undefined,
   []
 );
 const shot = new InvObjectsClass(
   "shot",
-  "shot description...",
+  "shots! shots! shots! What's a night out drinking without shots?\n Although they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
   undefined,
   undefined,
   []
@@ -96,20 +97,44 @@ const shot = new InvObjectsClass(
 
 const map = new InvObjectsClass(
   "map",
-  "map description...",
+  "Never know when a map of Burlington could come in handy...",
   undefined,
   undefined,
   []
+);
+
+const sparkWater = new InvObjectsClass(
+  "sparking water",
+  "Wow! So fancy! This really hits the spot...\nYou have gained 30 sustenance points.",
+  undefined,
+  undefined,
+  []
+);
+
+const food = new InvObjectsClass(
+"food",
+"I was absolutely famished! Nothing like a late night street meat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
+undefined,
+undefined,
+[]
+);
+
+const prize = new InvObjectsClass(
+  "sandwich",
+  "As the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob.",
+undefined,
+undefined,
+[]
 );
 
 // inventory look up table
 let invObjects = {
   map: map,
   water: water,
-  //   'sparkling water': sparkWater,
+  'sparkling water': sparkWater,
   shot: shot,
-  //   'food': food,
-  //   'sandwich': prize
+  'food': food,
+  'sandwich': prize
 };
 
 const churchStreet = new RoomClass(
@@ -149,6 +174,10 @@ const radioBean = new RoomClass(
   null,
   null
 );
+
+//  manually modifying/adding room connections
+churchStreet.east = threeNeeds;
+threeNeeds.south = churchStreet;
 
 // room lookup table object
 const rooms = {
@@ -222,7 +251,7 @@ async function play() {
     } else if (inputObject.toLowerCase() === "south") {
       if (rooms[player.currentRoom.toLowerCase()].south) {
         // this is to find rooms northern room connection
-        roomToSouth = rooms[player.currentRoom.toLowerCase()].south;
+        roomToSouth = rooms[player.currentRoom.toLowerCase()].south;ß
         player.currentRoom = roomToSouth.name;
         console.log(roomToSouth.description);
         console.log(`changing currentRoom to ${roomToSouth.name}`);
