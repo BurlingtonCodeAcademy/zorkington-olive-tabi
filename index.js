@@ -394,16 +394,24 @@ async function play() {
   } else if (userAction.use.includes(inputAction)) {
     // if the action is in the use lookup table
     // look at object
-    let currentRoomsInventory =
-      rooms[player.currentRoom.toLowerCase()].inventory;
-    for (let index = 0; index < currentRoomsInventory.length; index++) {
-      if (currentRoomsInventory[index].name === inputObject) {
-        console.log(currentRoomsInventory[index].description);
-        player.susPoints += currentRoomsInventory[index].susPoints;
-        break;
-      }
-      console.log("i don't know");
-    }
+let currentPlayersInventory = player.inventory
+const result = currentPlayersInventory.filter(
+  (object) => object.name === inputObject
+);
+    if (result.length > 0) {
+      console.log(result[0].description) 
+    } else if (result.length === 0) {
+      let currentRoomsInventory =
+    rooms[player.currentRoom.toLowerCase()].inventory;
+  for (let index = 0; index < currentRoomsInventory.length; index++) {
+    if (currentRoomsInventory[index].name === inputObject) {
+      console.log(currentRoomsInventory[index].description);
+      player.susPoints += currentRoomsInventory[index].susPoints;
+      break;
+    } 
+    } 
+  } else {console.log("i don't know") };
+  
     // ACTION: TAKE
     // adding to player.inventory
   } else if (userAction.take.includes(inputAction)) {
@@ -456,7 +464,7 @@ async function play() {
     // print room description
     console.log(rooms[player.currentRoom.toLowerCase()].description);
     //  maybe also current inventory later? 
-    console.log("im also printing the inventory")
+    console.log(rooms[player.currentRoom.toLowerCase()].inventory) 
   } else if (userAction.inventory.includes(inputAction)){
     let currentPlayersInventory = player.inventory;
     // returns empty array if not in room, and array with length one if in room
