@@ -164,8 +164,8 @@ let invObjects = {
 };
 //roomClass for all rooms below
 const radioBean = new RoomClass(
-  "the radio bean",
-  "The radio bean",
+  "The Radio Bean",
+  "The Radio Bean",
   [],
   null,
   null,
@@ -174,7 +174,7 @@ const radioBean = new RoomClass(
 );
 
 const churchStreetOne = new RoomClass(
-  "church street one",
+  "Church Street One",
   "Church street stretches out ahead of you to the north, to the east you see the three needs.  There doesn't seem to be a line.",
   [],
   null,
@@ -194,7 +194,7 @@ const threeNeeds = new RoomClass(
 );
 
 const threeNeedsPoolRoom = new RoomClass(
-  "threeNeeds pool room",
+  "Three Needs: pool room",
   "The pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
   [map, water, shot],
   null,
@@ -204,7 +204,7 @@ const threeNeedsPoolRoom = new RoomClass(
 );
 
 const foodCart = new RoomClass(
-  "food cart",
+  "Some Random Food Cart",
   "Hmmm... the smells of sweet snacks waft your way. The guy working the cart wants to know if you want to order anything.",
   [water, food],
   null,
@@ -214,7 +214,7 @@ const foodCart = new RoomClass(
 );
 
 const finnegans = new RoomClass(
-  "finnegans",
+  "Finnegans",
   "Its a little dark, its a little smelly, but the beer is good and the companies even better.  Not much to do here but head to the bar.....",
   [shot],
   null,
@@ -224,7 +224,7 @@ const finnegans = new RoomClass(
 );
 
 const deli126 = new RoomClass(
-  "deli 126",
+  "Deli 126",
   "This place seems a little fancier than most.  When you approach the bar the bar tender asks if you want some water... sparkling or still",
   [shot, water, sparkWater],
   null,
@@ -234,7 +234,7 @@ const deli126 = new RoomClass(
 );
 
 const redSquare = new RoomClass( // maybe include a die scenario here?
-  "red square",
+  "Red Square",
   "The bass is bumping and the night is getting late... is anyone in here even 21?? The bar lies ahead... ",
   [shot],
   null,
@@ -244,7 +244,7 @@ const redSquare = new RoomClass( // maybe include a die scenario here?
 );
 
 const kkd = new RoomClass(
-  "kountry kart deli",
+  "Kountry Kart Deli",
   "As the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob",
   [prize, water],
   null,
@@ -254,7 +254,7 @@ const kkd = new RoomClass(
 );
 
 const churchStreetTwo = new RoomClass(
-  "church street two",
+  "Church Street Two",
   "Church street stretches out ahead of you to the north and south, and to the east you see a food cart.  There are people everywhere.",
   [],
   null,
@@ -264,7 +264,7 @@ const churchStreetTwo = new RoomClass(
 );
 
 const churchStreetThree = new RoomClass(
-  "church street three",
+  "Church Street Three",
   "Church street stretches out ahead of you to the north and south.  To the east Finnegans and West is deli 126.",
   [],
   null,
@@ -274,7 +274,7 @@ const churchStreetThree = new RoomClass(
 );
 
 const churchStreetFour = new RoomClass(
-  "church street four",
+  "Church Street Four",
   "Church street stretches out ahead of you to the north and south.  To the east red square and West is kkd.",
   [],
   null,
@@ -284,7 +284,7 @@ const churchStreetFour = new RoomClass(
 );
 
 const churchStreetDrunk = new RoomClass(
-  "church street drunk",
+  "Church Street Drunks",
   "A mob of drunk tourists swarm you... they're mumbling something about being lost... you can't get by...\nThey won't let you through until you help them! They need directions!! ",
   [],
   null,
