@@ -409,7 +409,8 @@ async function play() {
 
 
 
-
+// need to remove item from inventory once used..
+// need to add sus points together.
 
 
 /*
