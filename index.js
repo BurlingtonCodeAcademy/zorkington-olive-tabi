@@ -486,10 +486,10 @@ const result = currentPlayersInventory.filter(
   return play();
 };
 
-// need to add sus points together.
-// using items from player inventory...
-// remove i dont know print from use.... 
+
+
 // add more details objects and rooms....
+// drunk people with map
 // extra = setting what actions can be taken on what objects. 
 
 /*
