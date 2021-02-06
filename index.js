@@ -105,7 +105,7 @@ const shot = new InvObjectsClass(
 
 const map = new InvObjectsClass(
   "map",
-  "Never know when a map of Burlington could come in handy...",
+  "I guess you never know when a map of Burlington could come in handy...?",
   undefined,
   undefined,
   [],
@@ -172,7 +172,7 @@ const churchStreetOne = new RoomClass(
 
 const threeNeeds = new RoomClass(
   "threeNeeds",
-  "The three needs blah blah blah",
+  "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, or continue on east to the pool room.",
   [water, shot],
   null,
   null,
@@ -182,7 +182,7 @@ const threeNeeds = new RoomClass(
 
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
-  "The three needs pool room you see a bar, a pool table, and on one of tables a map.",
+  "The pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
   [map, water, shot],
   null,
   null,
@@ -272,7 +272,7 @@ const churchStreetFour = new RoomClass(
 
 const churchStreetDrunk = new RoomClass(
   "church street drunk",
-  "a mob of drunk tourists swarm you.. you cant get by.. they need directions!! ",
+  "A mob of drunk tourists swarm you... they're mumbling something about being lost... you can't get by...\nThey won't let you through until you help them! They need directions!! ",
   [],
   null,
   null,
