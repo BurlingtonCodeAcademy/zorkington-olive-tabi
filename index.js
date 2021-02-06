@@ -397,7 +397,7 @@ async function play() {
       console.log(currentRoomsInventory[0].description)
     } else if (currentRoomsInventory[1].name === inputObject){
       console.log(currentRoomsInventory[1].description)
-    }
+    } else {console.log("I'm sorry i didn't understand that")}
    } else {
     console.log("you can't do that");
     
