@@ -37,7 +37,7 @@ let player = {
   name: [],
   inventory: [],
   currentRoom: [],
-  susPoints: 0
+  susPoints: 0,
 
   //moveRoom : function() {}
 };
@@ -65,12 +65,11 @@ class InvObjectsClass {
     this.currentRoom = currentRoom || startingRoom; // may need an inventory room for objects to be in...
     this.action = action || []; // action array
   }
-  obUse(userInputAction){
-    if(this.action.includes(userInputAction)) {
-    console.log(invObjects.description)
-   } 
+  obUse(userInputAction) {
+    if (this.action.includes(userInputAction)) {
+      console.log(invObjects.description);
+    }
   }
-  
 }
 
 //  user actions look table object
@@ -81,7 +80,7 @@ let userAction = {
   take: ["take", "grab", "order"],
   open: ["open", "unlock"],
   drop: ["drop"],
-  examine : ["examine"]
+  examine: ["examine"],
 };
 
 //  objects... maybe cant include locations because of variable shadowing
@@ -118,19 +117,19 @@ const sparkWater = new InvObjectsClass(
 );
 
 const food = new InvObjectsClass(
-"food",
-"I was absolutely famished! Nothing like a late night street meat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
-undefined,
-undefined,
-[]
+  "food",
+  "I was absolutely famished! Nothing like a late night street meat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
+  undefined,
+  undefined,
+  []
 );
 
 const prize = new InvObjectsClass(
   "sandwich",
   "It's hot and good and will keep you alive....",
-undefined,
-undefined,
-[]
+  undefined,
+  undefined,
+  []
 );
 
 // inventory look up table
@@ -138,10 +137,10 @@ let invObjects = {
   map: map,
   water: water,
   still: water,
-  'sparkling water': sparkWater,
+  "sparkling water": sparkWater,
   shot: shot,
-  'food': food,
-  'sandwich': prize
+  food: food,
+  sandwich: prize,
 };
 
 const radioBean = new RoomClass(
@@ -157,7 +156,7 @@ const radioBean = new RoomClass(
 const churchStreetOne = new RoomClass(
   "church street one",
   "Church street stretches out ahead of you to the north, to the east you see the three needs.  There doesn't seem to be a line.",
-  [], 
+  [],
   null,
   null,
   null,
@@ -222,7 +221,6 @@ const redSquare = new RoomClass( // maybe include a die scenario here?
   null,
   null,
   null
-
 );
 
 const kkd = new RoomClass(
@@ -238,7 +236,7 @@ const kkd = new RoomClass(
 const churchStreetTwo = new RoomClass(
   "church street two",
   "Church street stretches out ahead of you to the north and south, and to the east you see a food cart.  There are people everywhere.",
-  [], 
+  [],
   null,
   null,
   null,
@@ -248,7 +246,7 @@ const churchStreetTwo = new RoomClass(
 const churchStreetThree = new RoomClass(
   "church street three",
   "Church street stretches out ahead of you to the north and south.  To the east Finnegans and West is deli 126.",
-  [], 
+  [],
   null,
   null,
   null,
@@ -258,14 +256,12 @@ const churchStreetThree = new RoomClass(
 const churchStreetFour = new RoomClass(
   "church street four",
   "Church street stretches out ahead of you to the north and south.  To the east red square and West is kkd.",
-  [], 
+  [],
   null,
   null,
   null,
   null
 );
-
-
 
 //  manually modifying/adding room connections
 radioBean.north = churchStreetOne;
@@ -292,27 +288,24 @@ churchStreetFour.west = kkd;
 redSquare.west = churchStreetFour;
 kkd.east = churchStreetFour;
 
-
-
-
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
   "church street one": churchStreetOne, // N = church 2, E = needs
-  "threeneeds": threeNeeds, // E = pool room, W = church street one
+  threeneeds: threeNeeds, // E = pool room, W = church street one
   "threeneeds pool room": threeNeedsPoolRoom,
   "church street two": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
-    'food cart': foodCart, // W = church street 2, 
-    "church street three": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
-    'finnegans': finnegans, // W = church street 3
-    'deli': deli126, // E = church street 3
-    'deli 126': deli126, // E = church street 3
-    'church street four': churchStreetFour, // E = red square, W = kkd, S = church street 3
-    'red square': redSquare, // W = church street 4
-    'kkd': kkd, // E = church street 4
-    'kountry kart deli': kkd // same as above
-    // 'jps': jps, // if we get it all working and want to add it later we can
-    //  'pearl st. hill': hillUp, // for later
+  "food cart": foodCart, // W = church street 2,
+  "church street three": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
+  finnegans: finnegans, // W = church street 3
+  deli: deli126, // E = church street 3
+  "deli 126": deli126, // E = church street 3
+  "church street four": churchStreetFour, // E = red square, W = kkd, S = church street 3
+  "red square": redSquare, // W = church street 4
+  kkd: kkd, // E = church street 4
+  "kountry kart deli": kkd, // same as above
+  // 'jps': jps, // if we get it all working and want to add it later we can
+  //  'pearl st. hill': hillUp, // for later
   //  need to think about drunk people room...
 };
 
@@ -364,7 +357,7 @@ async function play() {
         console.log(roomToEast.description);
         // console.log(`changing currentRoom to ${roomToEast.name}`);
       } else {
-        console.log("you can't go that way"); 
+        console.log("you can't go that way");
       }
       // South
     } else if (inputObject.toLowerCase() === "south") {
@@ -389,29 +382,29 @@ async function play() {
         console.log("you can't go that way");
       }
     } // could add a "i dont understand here" otherwise will keep looping..
-  //  Actions! this doesnt work yet!!!
-  } else if (userAction.use.includes(inputAction)){ // if the action is in the use lookup table
+    //  Actions! this doesnt work yet!!!
+  } else if (userAction.use.includes(inputAction)) {
+    // if the action is in the use lookup table
     // look at object
-    currentRoomsInventory = rooms[player.currentRoom.toLowerCase()].inventory
-    if (currentRoomsInventory[0].name === inputObject){
-      console.log(currentRoomsInventory[0].description)
-    } else if (currentRoomsInventory[1].name === inputObject){
-      console.log(currentRoomsInventory[1].description)
-    } else {console.log("I'm sorry i didn't understand that")}
-   } else {
+    let currentRoomsInventory =
+      rooms[player.currentRoom.toLowerCase()].inventory;
+    for (let index = 0; index < currentRoomsInventory.length; index++) {
+      if (currentRoomsInventory[index].name === inputObject) {
+        console.log(currentRoomsInventory[index].description);
+        break;
+      } else {
+        console.log("i don't know");
+      }
+    }
+  } else {
     console.log("you can't do that");
-    
   }
+
   return play();
- 
 }
-
-
-
 
 // need to remove item from inventory once used..
 // need to add sus points together.
-
 
 /*
 
