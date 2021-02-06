@@ -58,12 +58,13 @@ class RoomClass {
 
 //  inventory class
 class InvObjectsClass {
-  constructor(name, description, startingRoom, currentRoom, action) {
+  constructor(name, description, startingRoom, currentRoom, action, susPoints) {
     this.name = name;
     this.description = description;
     this.startingRoom = startingRoom;
     this.currentRoom = currentRoom || startingRoom; // may need an inventory room for objects to be in...
     this.action = action || []; // action array
+    this.susPoints = susPoints
   }
   obUse(userInputAction) {
     if (this.action.includes(userInputAction)) {
@@ -91,14 +92,16 @@ const water = new InvObjectsClass(
   "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 15 sustenance points.",
   undefined,
   undefined,
-  []
+  [],
+15
 );
 const shot = new InvObjectsClass(
   "shot",
   "shots! shots! shots! What's a night out drinking without shots?\n Although they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
   undefined,
   undefined,
-  []
+  [],
+  1
 );
 
 const map = new InvObjectsClass(
@@ -106,7 +109,8 @@ const map = new InvObjectsClass(
   "Never know when a map of Burlington could come in handy...",
   undefined,
   undefined,
-  []
+  [],
+  0
 );
 
 const sparkWater = new InvObjectsClass(
@@ -114,7 +118,8 @@ const sparkWater = new InvObjectsClass(
   "Wow! So fancy! This really hits the spot...\nYou have gained 30 sustenance points.",
   undefined,
   undefined,
-  []
+  [],
+  30
 );
 
 const food = new InvObjectsClass(
@@ -122,7 +127,8 @@ const food = new InvObjectsClass(
   "I was absolutely famished! Nothing like a late night street meat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
   undefined,
   undefined,
-  []
+  [],
+  30
 );
 
 const prize = new InvObjectsClass(
@@ -130,7 +136,8 @@ const prize = new InvObjectsClass(
   "It's hot and good and will keep you alive....",
   undefined,
   undefined,
-  []
+  [],
+  50
 );
 
 // inventory look up table
@@ -392,6 +399,7 @@ async function play() {
     for (let index = 0; index < currentRoomsInventory.length; index++) {
       if (currentRoomsInventory[index].name === inputObject) {
         console.log(currentRoomsInventory[index].description);
+        player.susPoints += currentRoomsInventory[index].susPoints;
         break;
       }
       console.log("i don't know");
@@ -456,6 +464,7 @@ async function play() {
       object => object.name);
     
     console.log(result);
+    console.log("Your current sustenance points are " + player.susPoints) 
   }else {
     console.log("you can't do that");
   }
