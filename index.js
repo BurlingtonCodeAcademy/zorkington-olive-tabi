@@ -37,7 +37,7 @@ let player = {
   name: [],
   inventory: [],
   currentRoom: [],
-  susPoints: [],
+  susPoints: 0
 
   //moveRoom : function() {}
 };
