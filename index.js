@@ -398,8 +398,15 @@ let currentPlayersInventory = player.inventory
 const result = currentPlayersInventory.filter(
   (object) => object.name === inputObject
 );
+
     if (result.length > 0) {
-      console.log(result[0].description) 
+      console.log(result[0].description);
+      resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
+      // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
+      if (resultIndex > -1) {
+        currentPlayersInventory.splice(resultIndex, 1);
+      }
+      player.susPoints += result[0].susPoints;
     } else if (result.length === 0) {
       let currentRoomsInventory =
     rooms[player.currentRoom.toLowerCase()].inventory;
@@ -408,7 +415,7 @@ const result = currentPlayersInventory.filter(
       console.log(currentRoomsInventory[index].description);
       player.susPoints += currentRoomsInventory[index].susPoints;
       break;
-    } 
+    } break;
     } 
   } else {console.log("i don't know") };
   
