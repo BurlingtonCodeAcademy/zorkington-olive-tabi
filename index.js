@@ -184,7 +184,7 @@ const churchStreetOne = new RoomClass(
 );
 
 const threeNeeds = new RoomClass(
-  "threeNeeds",
+  "Three Needs",
   "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, eat a slizzing slice of 'za, or continue on east to the pool room.",
   [water, shot, pizza],
   null,
@@ -224,7 +224,7 @@ const finnegans = new RoomClass(
 );
 
 const deli126 = new RoomClass(
-  "deli",
+  "deli 126",
   "This place seems a little fancier than most.  When you approach the bar the bar tender asks if you want some water... sparkling or still",
   [shot, water, sparkWater],
   null,
