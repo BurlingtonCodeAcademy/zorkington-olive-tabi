@@ -77,8 +77,8 @@ class InvObjectsClass {
 let userAction = {
   move: ["go", "walk"],
   use: ["use", "play", "get", "drink", "eat", "order"], //tip?
-  take: ["take", "grab", "order"],
-  open: ["open", "unlock"],
+  take: ["take", "grab"],
+  // open: ["open", "unlock"],
   drop: ["drop"],
   examine: ["examine"],
 };
@@ -382,7 +382,7 @@ async function play() {
         console.log("you can't go that way");
       }
     } // could add a "i dont understand here" otherwise will keep looping..
-    //  Actions! this doesnt work yet!!!
+    //  Actions! USE
   } else if (userAction.use.includes(inputAction)) {
     // if the action is in the use lookup table
     // look at object
@@ -396,10 +396,30 @@ async function play() {
         console.log("i don't know");
       }
     }
+    // ACTION: TAKE
+    // adding to player.inventory
+  } else if (userAction.take.includes(inputAction)) {
+    // if the action is in the use lookup table
+    // look at object
+    let currentRoomsInventory =
+      rooms[player.currentRoom.toLowerCase()].inventory;
+    // returns empty array if not in room, and array with length one if in room
+    const result = currentRoomsInventory.filter(object => object.name === inputObject);
+    //  if length is 1 then print description, add to player inventory and take out of room inventory
+    if(result.length > 0){
+      console.log(result[0].description);
+      player.inventory.push(invObjects[inputObject]);
+      // index where object is in room inventory
+      resultIndex = currentRoomsInventory.indexOf(invObjects[inputObject]);
+      // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
+      if(resultIndex > -1){
+        currentRoomsInventory.splice(resultIndex, 1);
+      };
+      
+    } else {console.log("you cant take that" )};
   } else {
     console.log("you can't do that");
   }
-
   return play();
 }
 
