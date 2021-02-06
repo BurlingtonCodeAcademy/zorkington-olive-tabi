@@ -76,12 +76,12 @@ class InvObjectsClass {
 
 let userAction = {
   move: ["go", "walk"],
-  use: ["use", "play", "get", "drink", "eat", "order"], //tip?
-  take: ["take", "grab"],
+  use: ["use", "play", "get", "drink", "eat"], //tip? ///also, switching order for now
+  take: ["take", "grab", "order"],//added order here for food cart...but it might cause issue of "can't do that later... "
   // open: ["open", "unlock"],
   drop: ["drop"],
   examine: ["examine"],
-  inventory: ["inventory"],
+  inventory: ["inventory", "i"],
 };
 
 //  objects... maybe cant include locations because of variable shadowing
@@ -94,6 +94,17 @@ const water = new InvObjectsClass(
   [],
   15
 );
+//adding pizza for extra sus
+const pizza = new InvObjectsClass(
+  "pizza",
+  "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... you gain 20 sustenance points.",
+  undefined,
+  undefined,
+  [],
+  20
+);
+
+
 const shot = new InvObjectsClass(
   "shot",
   "shots! shots! shots! What's a night out drinking without shots?\n Although they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
@@ -147,9 +158,10 @@ let invObjects = {
   "sparkling water": sparkWater,
   shot: shot,
   food: food,
+  pizza: pizza,
   sandwich: prize,
 };
-
+//roomClass for all rooms below
 const radioBean = new RoomClass(
   "the radio bean",
   "The radio bean",
@@ -172,8 +184,8 @@ const churchStreetOne = new RoomClass(
 
 const threeNeeds = new RoomClass(
   "threeNeeds",
-  "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, or continue on east to the pool room.",
-  [water, shot],
+  "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, eat a slizzing slice of 'za, or continue on east to the pool room.",
+  [water, shot, pizza],
   null,
   null,
   null,
@@ -280,11 +292,12 @@ const churchStreetDrunk = new RoomClass(
   null
 );
 
+///DIRECTIONALS
+
 //  manually modifying/adding room connections
 radioBean.north = churchStreetOne;
 churchStreetOne.north = churchStreetTwo;
 churchStreetOne.east = threeNeeds;
-//threeNeeds.south = churchStreetOne;
 threeNeeds.east = threeNeedsPoolRoom;
 threeNeeds.west = churchStreetOne;
 threeNeedsPoolRoom.west = threeNeeds;
@@ -292,7 +305,6 @@ churchStreetTwo.north = churchStreetThree;
 churchStreetTwo.south = churchStreetOne;
 churchStreetTwo.east = foodCart;
 foodCart.west = churchStreetTwo;
-//  should we be able to go north from here?
 churchStreetThree.south = churchStreetTwo;
 churchStreetThree.east = finnegans;
 churchStreetThree.west = deli126;
@@ -325,7 +337,7 @@ const rooms = {
   "kountry kart deli": kkd, // same as above
   // 'jps': jps, // if we get it all working and want to add it later we can
   //  'pearl st. hill': hillUp, // for later
-  //  need to think about drunk people room...
+
 };
 
 // ------------------------------------- PLAN ------------------------------------------------------
@@ -507,7 +519,7 @@ async function play() {
         currentPlayersInventory.splice(resultIndex, 1);
       }
     } else {
-      console.log("you cant drop that");
+      console.log("you can't drop that");
     }
   } else if (userAction.examine.includes(inputAction)) {
     // print room description
@@ -518,7 +530,7 @@ async function play() {
     let currentPlayersInventory = player.inventory;
     // returns empty array if not in room, and array with length one if in room
     const result = currentPlayersInventory.map((object) => object.name);
-
+//inventory, suspoints
     console.log(result);
     console.log("Your current sustenance points are " + player.susPoints);
   } else {
@@ -527,8 +539,8 @@ async function play() {
   return play();
 }
 
-// add more details objects and rooms....
-// drunk people with map
+//need to trouble shoot when ordering something... doesn't prompt "you can't"
+
 // extra = setting what actions can be taken on what objects.
 
 /*
