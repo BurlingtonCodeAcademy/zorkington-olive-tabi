@@ -65,6 +65,12 @@ class InvObjectsClass {
     this.currentRoom = currentRoom || startingRoom; // may need an inventory room for objects to be in...
     this.action = action || []; // action array
   }
+  obUse(userInputAction){
+    if(this.action.includes(userInputAction)) {
+    console.log(invObjects.description)
+   } 
+  }
+  
 }
 
 //  user actions look table object
@@ -273,6 +279,7 @@ churchStreetTwo.north = churchStreetThree;
 churchStreetTwo.south = churchStreetOne;
 churchStreetTwo.east = foodCart;
 foodCart.west = churchStreetTwo;
+//  should we be able to go north from here?
 churchStreetThree.south = churchStreetTwo;
 churchStreetThree.east = finnegans;
 churchStreetThree.west = deli126;
@@ -383,33 +390,20 @@ async function play() {
       }
     } // could add a "i dont understand here" otherwise will keep looping..
   //  Actions! this doesnt work yet!!!
-  } else if (userAction.use.includes(inputAction)){
+  } else if (userAction.use.includes(inputAction)){ // if the action is in the use lookup table
     // look at object
-    objectToUse = invObjects[inputObject.toLowerCase()].name;
     currentRoomsInventory = rooms[player.currentRoom.toLowerCase()].inventory
-    
-    if (currentRoomsInventory.forEach(objectThing => {
-      objectThing.name  === inputObject})){
-     console.log(objectToUse.description)
-      
-      }else {
-      // console.log(rooms[player.currentRoom.toLowerCase()].inventory[objectToUse]);
-      console.log(currentRoomsInventory.includes(invObjects[inputObject].name));
-      console.log(invObjects[inputObject].name)
-      console.log(currentRoomsInventory)
+    if (currentRoomsInventory[0].name === inputObject){
+      console.log(currentRoomsInventory[0].description)
+    } else if (currentRoomsInventory[1].name === inputObject){
+      console.log(currentRoomsInventory[1].description)
     }
-    
-  } else {
+   } else {
     console.log("you can't do that");
+    
   }
   return play();
-
-
-
-
-
-
-
+ 
 }
 
 
