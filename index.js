@@ -81,6 +81,7 @@ let userAction = {
   // open: ["open", "unlock"],
   drop: ["drop"],
   examine: ["examine"],
+  inventory: ["inventory"]
 };
 
 //  objects... maybe cant include locations because of variable shadowing
@@ -444,14 +445,28 @@ async function play() {
       console.log("you cant drop that");
     }
   } else if (userAction.examine.includes(inputAction)){
+    // print room description
+    console.log(rooms[player.currentRoom.toLowerCase()].description);
+    //  maybe also current inventory later? 
+    console.log("im also printing the inventory")
+  } else if (userAction.inventory.includes(inputAction)){
+    let currentPlayersInventory = player.inventory;
+    // returns empty array if not in room, and array with length one if in room
+    const result = currentPlayersInventory.map(
+      object => object.name);
+    
+    console.log(result);
   }else {
     console.log("you can't do that");
   }
   return play();
-}
+};
 
 // need to add sus points together.
 // using items from player inventory...
+// remove i dont know print from use.... 
+// add more details objects and rooms....
+// extra = setting what actions can be taken on what objects. 
 
 /*
 
