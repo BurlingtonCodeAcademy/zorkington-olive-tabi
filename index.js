@@ -392,9 +392,8 @@ async function play() {
       if (currentRoomsInventory[index].name === inputObject) {
         console.log(currentRoomsInventory[index].description);
         break;
-      } else {
-        console.log("i don't know");
       }
+      console.log("i don't know");
     }
     // ACTION: TAKE
     // adding to player.inventory
@@ -404,29 +403,58 @@ async function play() {
     let currentRoomsInventory =
       rooms[player.currentRoom.toLowerCase()].inventory;
     // returns empty array if not in room, and array with length one if in room
-    const result = currentRoomsInventory.filter(object => object.name === inputObject);
+    const result = currentRoomsInventory.filter(
+      (object) => object.name === inputObject
+    );
     //  if length is 1 then print description, add to player inventory and take out of room inventory
-    if(result.length > 0){
-      console.log(result[0].description);
+    if (result.length > 0) {
+      console.log(
+        "You took the " + inputObject + ".\n\n" + result[0].description
+      );
       player.inventory.push(invObjects[inputObject]);
       // index where object is in room inventory
       resultIndex = currentRoomsInventory.indexOf(invObjects[inputObject]);
       // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
-      if(resultIndex > -1){
+      if (resultIndex > -1) {
         currentRoomsInventory.splice(resultIndex, 1);
-      };
-      
-    } else {console.log("you cant take that" )};
-  } else {
+      }
+    } else {
+      console.log("you cant take that");
+    }
+  } else if (userAction.drop.includes(inputAction)) {
+    // look at object
+    let currentPlayersInventory = player.inventory;
+    let currentRoomsInventory =
+      rooms[player.currentRoom.toLowerCase()].inventory;
+    // returns empty array if not in room, and array with length one if in room
+    const result = currentPlayersInventory.filter(
+      (object) => object.name === inputObject
+    );
+    //  if length is 1 then print description, add to player inventory and take out of room inventory
+    if (result.length > 0) {
+      console.log("You dropped the " + inputObject);
+      currentRoomsInventory.push(invObjects[inputObject]);
+      // index where object is in room inventory
+      resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
+      // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
+      if (resultIndex > -1) {
+        currentPlayersInventory.splice(resultIndex, 1);
+      }
+    } else {
+      console.log("you cant drop that");
+    }
+  } else if (userAction.examine.includes(inputAction)){
+  }else {
     console.log("you can't do that");
   }
   return play();
 }
 
-// need to remove item from inventory once used..
 // need to add sus points together.
+// using items from player inventory...
 
 /*
+
 
 //  structure hypothetical
 
