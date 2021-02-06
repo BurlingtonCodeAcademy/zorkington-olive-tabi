@@ -53,7 +53,6 @@ class RoomClass {
     this.south = south || null;
     this.west = west || null;
   }
-  //will need "if" drop item - add to inventory
 }
 
 //  inventory class
@@ -64,7 +63,7 @@ class InvObjectsClass {
     this.startingRoom = startingRoom;
     this.currentRoom = currentRoom || startingRoom; // may need an inventory room for objects to be in...
     this.action = action || []; // action array
-    this.susPoints = susPoints
+    this.susPoints = susPoints;
   }
   obUse(userInputAction) {
     if (this.action.includes(userInputAction)) {
@@ -82,7 +81,7 @@ let userAction = {
   // open: ["open", "unlock"],
   drop: ["drop"],
   examine: ["examine"],
-  inventory: ["inventory"]
+  inventory: ["inventory"],
 };
 
 //  objects... maybe cant include locations because of variable shadowing
@@ -93,7 +92,7 @@ const water = new InvObjectsClass(
   undefined,
   undefined,
   [],
-15
+  15
 );
 const shot = new InvObjectsClass(
   "shot",
@@ -271,6 +270,16 @@ const churchStreetFour = new RoomClass(
   null
 );
 
+const churchStreetDrunk = new RoomClass(
+  "church street drunk",
+  "a mob of drunk tourists swarm you.. you cant get by.. they need directions!! ",
+  [],
+  null,
+  null,
+  null,
+  null
+);
+
 //  manually modifying/adding room connections
 radioBean.north = churchStreetOne;
 churchStreetOne.north = churchStreetTwo;
@@ -287,9 +296,10 @@ foodCart.west = churchStreetTwo;
 churchStreetThree.south = churchStreetTwo;
 churchStreetThree.east = finnegans;
 churchStreetThree.west = deli126;
-churchStreetThree.north = churchStreetFour;
+churchStreetThree.north = churchStreetDrunk;
 finnegans.west = churchStreetThree;
 deli126.east = churchStreetThree;
+churchStreetDrunk.south = churchStreetThree;
 churchStreetFour.south = churchStreetThree;
 churchStreetFour.east = redSquare;
 churchStreetFour.west = kkd;
@@ -308,6 +318,7 @@ const rooms = {
   finnegans: finnegans, // W = church street 3
   deli: deli126, // E = church street 3
   "deli 126": deli126, // E = church street 3
+  "church street drunk": churchStreetDrunk, // N = conditional (if use.map then n = churchstreet 4), S= church street three
   "church street four": churchStreetFour, // E = red square, W = kkd, S = church street 3
   "red square": redSquare, // W = church street 4
   kkd: kkd, // E = church street 4
@@ -348,7 +359,7 @@ async function play() {
     // NORTH
     if (inputObject.toLowerCase() === "north") {
       if (rooms[player.currentRoom.toLowerCase()].north) {
-        // this is to find rooms northern room connection
+        // this is to find the rooms northern room connection
         roomToNorth = rooms[player.currentRoom.toLowerCase()].north;
         player.currentRoom = roomToNorth.name;
         console.log(roomToNorth.description);
@@ -392,35 +403,66 @@ async function play() {
     } // could add a "i dont understand here" otherwise will keep looping..
     //  Actions! USE
   } else if (userAction.use.includes(inputAction)) {
-    // if the action is in the use lookup table
-    // look at object
-let currentPlayersInventory = player.inventory
-const result = currentPlayersInventory.filter(
-  (object) => object.name === inputObject
-);
+    if (player.currentRoom === "church street drunk" && inputObject === "map") {
+      console.log("The drunk people thank you for your map...");
+      churchStreetDrunk.north = churchStreetFour;
+      churchStreetThree.north = churchStreetFour;
 
-    if (result.length > 0) {
-      console.log(result[0].description);
-      resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
-      // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
-      if (resultIndex > -1) {
-        currentPlayersInventory.splice(resultIndex, 1);
+      let currentPlayersInventory = player.inventory;
+      const result = currentPlayersInventory.filter(
+        (object) => object.name === inputObject
+      );
+
+      if (result.length > 0) {
+        console.log(result[0].description);
+        resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
+        // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
+        if (resultIndex > -1) {
+          currentPlayersInventory.splice(resultIndex, 1);
+        }
+        player.susPoints += result[0].susPoints;
       }
-      player.susPoints += result[0].susPoints;
-    } else if (result.length === 0) {
-      let currentRoomsInventory =
-    rooms[player.currentRoom.toLowerCase()].inventory;
-  for (let index = 0; index < currentRoomsInventory.length; index++) {
-    if (currentRoomsInventory[index].name === inputObject) {
-      console.log(currentRoomsInventory[index].description);
-      player.susPoints += currentRoomsInventory[index].susPoints;
-      break;
-    } break;
-    } 
-  } else {console.log("i don't know") };
-  
-    // ACTION: TAKE
-    // adding to player.inventory
+    } else if (
+      player.currentRoom === "church street drunk" &&
+      inputObject !== "map"
+    ) {
+      console.log(
+        "They won't let you pass.. Can you help them with directions?"
+      );
+      return churchStreetDrunk.north === null;
+    } else {
+      // if the action is in the use lookup table
+      // look at object
+      let currentPlayersInventory = player.inventory;
+      const result = currentPlayersInventory.filter(
+        (object) => object.name === inputObject
+      );
+
+      if (result.length > 0) {
+        console.log(result[0].description);
+        resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
+        // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
+        if (resultIndex > -1) {
+          currentPlayersInventory.splice(resultIndex, 1);
+        }
+        player.susPoints += result[0].susPoints;
+      } else if (result.length === 0) {
+        let currentRoomsInventory =
+          rooms[player.currentRoom.toLowerCase()].inventory;
+        for (let index = 0; index < currentRoomsInventory.length; index++) {
+          if (currentRoomsInventory[index].name === inputObject) {
+            console.log(currentRoomsInventory[index].description);
+            player.susPoints += currentRoomsInventory[index].susPoints;
+            break;
+          }
+          break;
+        }
+      } else {
+        console.log("i don't know");
+      }
+      // ACTION: TAKE
+      // adding to player.inventory
+    }
   } else if (userAction.take.includes(inputAction)) {
     // if the action is in the use lookup table
     // look at object
@@ -467,30 +509,27 @@ const result = currentPlayersInventory.filter(
     } else {
       console.log("you cant drop that");
     }
-  } else if (userAction.examine.includes(inputAction)){
+  } else if (userAction.examine.includes(inputAction)) {
     // print room description
     console.log(rooms[player.currentRoom.toLowerCase()].description);
-    //  maybe also current inventory later? 
-    console.log(rooms[player.currentRoom.toLowerCase()].inventory) 
-  } else if (userAction.inventory.includes(inputAction)){
+    //  maybe also current inventory later?
+    console.log(rooms[player.currentRoom.toLowerCase()].inventory);
+  } else if (userAction.inventory.includes(inputAction)) {
     let currentPlayersInventory = player.inventory;
     // returns empty array if not in room, and array with length one if in room
-    const result = currentPlayersInventory.map(
-      object => object.name);
-    
+    const result = currentPlayersInventory.map((object) => object.name);
+
     console.log(result);
-    console.log("Your current sustenance points are " + player.susPoints) 
-  }else {
+    console.log("Your current sustenance points are " + player.susPoints);
+  } else {
     console.log("you can't do that");
   }
   return play();
-};
-
-
+}
 
 // add more details objects and rooms....
 // drunk people with map
-// extra = setting what actions can be taken on what objects. 
+// extra = setting what actions can be taken on what objects.
 
 /*
 
