@@ -184,7 +184,7 @@ const churchStreetOne = new RoomClass(
 );
 
 const threeNeeds = new RoomClass(
-  "Three Needs",
+  "threeNeeds",
   "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, eat a slizzing slice of 'za, or continue on east to the pool room.",
   [water, shot, pizza],
   null,
@@ -194,7 +194,7 @@ const threeNeeds = new RoomClass(
 );
 
 const threeNeedsPoolRoom = new RoomClass(
-  "Three Needs: pool room",
+  "threeNeeds pool room",
   "The pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
   [map, water, shot],
   null,
@@ -204,7 +204,7 @@ const threeNeedsPoolRoom = new RoomClass(
 );
 
 const foodCart = new RoomClass(
-  "Some Random Food Cart",
+  "Food Cart",
   "Hmmm... the smells of sweet snacks waft your way. The guy working the cart wants to know if you want to order anything.",
   [water, food],
   null,
@@ -265,7 +265,7 @@ const churchStreetTwo = new RoomClass(
 
 const churchStreetThree = new RoomClass(
   "Church Street Three",
-  "Church street stretches out ahead of you to the north and south.  To the east Finnegans and West is deli 126.",
+  "Church street stretches out ahead of you to the north and south.  To the east Finnegans and west is Deli 126.",
   [],
   null,
   null,
@@ -275,7 +275,7 @@ const churchStreetThree = new RoomClass(
 
 const churchStreetFour = new RoomClass(
   "Church Street Four",
-  "Church street stretches out ahead of you to the north and south.  To the east red square and West is kkd.",
+  "Church street stretches out ahead of you to the north and south.  To the east Red Square and west is kkd.",
   [],
   null,
   null,
@@ -284,7 +284,7 @@ const churchStreetFour = new RoomClass(
 );
 
 const churchStreetDrunk = new RoomClass(
-  "Church Street Drunks",
+  "church street drunk",
   "A mob of drunk tourists swarm you... they're mumbling something about being lost... you can't get by...\nThey won't let you through until you help them! They need directions!! ",
   [],
   null,
@@ -324,8 +324,9 @@ const rooms = {
   "radio bean": radioBean,
   "church street one": churchStreetOne, // N = church 2, E = needs
   threeneeds: threeNeeds, // E = pool room, W = church street one
-  //"Three Needs" : threeNeeds - can we get three needs to print better? 
+  //"Three Needs" : threeNeeds,// - can we get three needs to print better? 
   "threeneeds pool room": threeNeedsPoolRoom,
+  //"Three Needs pool room": threeNeedsPoolRoom,
   "church street two": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
   "food cart": foodCart, // W = church street 2,
   "church street three": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
