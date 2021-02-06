@@ -76,7 +76,7 @@ class InvObjectsClass {
 
 let userAction = {
   move: ["go", "walk"],
-  use: ["use", "play", "get", "drink", "eat"], //tip? ///also, switching order for now
+  use: ["use", "play", "get", "drink", "eat", "give"], //tip? ///also, switching order for now
   take: ["take", "grab", "order"],//added order here for food cart...but it might cause issue of "can't do that later... "
   // open: ["open", "unlock"],
   drop: ["drop"],
@@ -124,7 +124,7 @@ const map = new InvObjectsClass(
 );
 
 const sparkWater = new InvObjectsClass(
-  "sparking water",
+  "sparkling water",
   "Wow! So fancy! This really hits the spot...\nYou have gained 30 sustenance points.",
   undefined,
   undefined,
@@ -160,6 +160,7 @@ let invObjects = {
   food: food,
   pizza: pizza,
   sandwich: prize,
+  "rise n shiner" : prize
 };
 //roomClass for all rooms below
 const radioBean = new RoomClass(
@@ -323,6 +324,7 @@ const rooms = {
   "radio bean": radioBean,
   "church street one": churchStreetOne, // N = church 2, E = needs
   threeneeds: threeNeeds, // E = pool room, W = church street one
+  //"Three Needs" : threeNeeds - can we get three needs to print better? 
   "threeneeds pool room": threeNeedsPoolRoom,
   "church street two": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
   "food cart": foodCart, // W = church street 2,
@@ -337,6 +339,8 @@ const rooms = {
   "kountry kart deli": kkd, // same as above
   // 'jps': jps, // if we get it all working and want to add it later we can
   //  'pearl st. hill': hillUp, // for later
+
+  //why does kountry kart deli print as room but three needs stays as threeNeeds??
 
 };
 
@@ -555,4 +559,6 @@ if (userInput === 'i'){
   console.log(player.inventory);
 }
 
+
+get three needs to print better?
 */
