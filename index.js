@@ -375,61 +375,6 @@ const rooms = {
 //  4) at end want to jump to very top of play function...  will take you to top of function.. return function(); recursive loop
 
 async function play() {
-<<<<<<< HEAD
-  //  sanitize
-  let input = await ask(
-    `Current Room: ${player.currentRoom} \nWhat would you like to do....\n\n>_`
-  );
-  let inputSanitize = input.trim().toLowerCase();
-  let inputArray = inputSanitize.split(" ");
-  let inputAction = inputArray[0];
-  let inputObject = inputArray[1]; // Can also be direction if action is go , walk, etc.
-
-  //  if user types end --> end
-  if (inputSanitize === "end") {
-    process.exit();
-
-    // if user types inventory show inventory
-
-    // if user wants to move lets move
-  } else if (userAction.move.includes(inputAction)) {
-    // conditional directions
-    // NORTH
-    if (inputObject.toLowerCase() === "north") {
-      if (rooms[player.currentRoom.toLowerCase()].north) {
-        // this is to find the rooms northern room connection
-        roomToNorth = rooms[player.currentRoom.toLowerCase()].north;
-        player.currentRoom = roomToNorth.name;
-        console.log(roomToNorth.description);
-        // console.log(`changing currentRoom to ${roomToNorth.name}`);
-      } else {
-        console.log("you can't go that way");
-      }
-      // EAST
-    } else if (inputObject.toLowerCase() === "east") {
-     
-      if (rooms[player.currentRoom.toLowerCase()].east) { 
-        if (player.currentRoom === hillUp) {
-        console.log (rooms[player.currentRoom].description);
-        process.exit()
-      } else if { 
-        // this is to find rooms northern room connection
-        roomToEast = rooms[player.currentRoom.toLowerCase()].east;
-        player.currentRoom = roomToEast.name;
-        console.log(roomToEast.description);
-        // console.log(`changing currentRoom to ${roomToEast.name}`);
-      } else {
-        console.log("you can't go that way");
-      }
-      // South
-    } else if (inputObject.toLowerCase() === "south") {
-      if (rooms[player.currentRoom.toLowerCase()].south) {
-        // this is to find rooms northern room connection
-        roomToSouth = rooms[player.currentRoom.toLowerCase()].south;
-        player.currentRoom = roomToSouth.name;
-        console.log(roomToSouth.description);
-        // console.log(`changing currentRoom to ${roomToSouth.name}`);
-=======
   while (player.susPoints < 100) {
     //  sanitize
     let input = await ask(
@@ -537,7 +482,6 @@ async function play() {
           "\nThey won't let you pass.. Can you help them with directions?"
         );
         return churchStreetDrunk.south === null;
->>>>>>> dd1e951d7cc7222dad1b07338c180475fba4cd2d
       } else {
         // if the action is in the use lookup table
         // look at object
