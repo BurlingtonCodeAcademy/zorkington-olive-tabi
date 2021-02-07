@@ -11,7 +11,7 @@ function ask(questionText) {
   });
 }
 // welcome message doesn't go back to this
-const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n\nYou meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `; //  \n\nDo you want to continue your night out?`;
+const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n\nYou meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `; 
 console.log(welcomeMessage);
 start();
 
@@ -40,7 +40,7 @@ let player = {
   name: [],
   inventory: [],
   currentRoom: [],
-  susPoints: 90, // change bakc to 0
+  susPoints: 0, // 
 
   //moveRoom : function() {}
 };
@@ -628,13 +628,4 @@ async function play() {
   }
 }
 
-//need to trouble shoot when ordering something... doesn't prompt "you can't"
 
-// extra = setting what actions can be taken on what objects.
-
-/*
-
-get three needs to print better?
-*/
-//  objects need take description and use description
-//  need win condition
