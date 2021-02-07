@@ -10,7 +10,7 @@ function ask(questionText) {
     readlineInterface.question(questionText, resolve);
   });
 }
-
+// welcome message doesn't go back to this
 const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n You meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `;  //  \n\nDo you want to continue your night out?`;
 console.log(welcomeMessage);
 start();
@@ -18,15 +18,15 @@ start();
 
 async function start() {
   let answer = await ask("\n\nDo you want to continue your night out?");
-
+//ask if want to start game
   if (answer === "no" || answer === "n") {
     console.log("Enjoy your lame night in!");
     process.exit();
   } else if (answer === "yes" || answer === 'y') {
     console.log(
       "You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the south a familiar sight....."
-    );
-    player.currentRoom = "radio bean";
+    ); 
+    player.currentRoom = "radio bean"; //brings us to current/starting room
     return play();
   } else {
     console.log("Sorry, I didn't catch that!")
@@ -99,16 +99,7 @@ const water = new InvObjectsClass(
   [],
   15
 );
-//adding pizza for extra sus
-// const pizza = new InvObjectsClass(
-//   "pizza",
-//   "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... ",
-//   "NICE! you'll be glad you had that pizza tomorrow...... you gain 20 sustenance points.",
-//   // undefined,
-//   // undefined,
-//   [],
-//   20
-// );
+
 
 const shot = new InvObjectsClass(
   "shot",
@@ -178,6 +169,7 @@ let invObjects = {
   "rise n shiner": prize
 };
 //roomClass for all rooms below
+//starting room
 const radioBean = new RoomClass(
   "The Radio Bean",
   "The Radio Bean",
@@ -207,7 +199,7 @@ const threeNeeds = new RoomClass(
   null,
   null
 );
-
+//map is here for puzzle!!
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
   "The pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
@@ -248,7 +240,7 @@ const deli126 = new RoomClass(
   null
 );
 
-const redSquare = new RoomClass( // maybe include a die scenario here?
+const redSquare = new RoomClass( 
   "Red Square",
   "The bass is bumping and the night is getting late... is anyone in here even 21?? The bar lies ahead... ",
   [shot],
@@ -258,6 +250,7 @@ const redSquare = new RoomClass( // maybe include a die scenario here?
   null
 );
 
+//win conditional will be here
 const kkd = new RoomClass(
   "Kountry Kart Deli",
   "As the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob",
@@ -308,10 +301,21 @@ const churchStreetDrunk = new RoomClass(
   null
 );
 
+const hillUp = new RoomClass(
+  "hill up",
+  "Oof. You are in no capacity to walk up the hill to UVM... you try, you quickly fail... your night is over.\n Better luck next time!",
+  [],
+  null,
+  null,
+  null,
+  null
+);
+
 ///DIRECTIONALS
 
 //  manually modifying/adding room connections
 radioBean.south = churchStreetOne;
+radioBean.east = hillUp;
 churchStreetOne.south = churchStreetTwo;
 churchStreetOne.east = threeNeeds;
 threeNeeds.east = threeNeedsPoolRoom;
@@ -326,17 +330,20 @@ churchStreetThree.east = finnegans;
 churchStreetThree.west = deli126;
 churchStreetThree.south = churchStreetDrunk;
 finnegans.west = churchStreetThree;
+finnegans.east = hillUp;
 deli126.east = churchStreetThree;
 churchStreetDrunk.north = churchStreetThree;
 churchStreetFour.north = churchStreetThree;
 churchStreetFour.east = redSquare;
 churchStreetFour.west = kkd;
 redSquare.west = churchStreetFour;
+redSquare.east = hillUp;
 kkd.east = churchStreetFour;
 
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
+  "hill up": hillUp,
   "church street one": churchStreetOne, // s = church 2, E = needs
   threeneeds: threeNeeds, // E = pool room, W = church street one
   //"Three Needs" : threeNeeds,// - can we get three needs to print better?
@@ -356,7 +363,7 @@ const rooms = {
   // 'jps': jps, // if we get it all working and want to add it later we can
   //  'pearl st. hill': hillUp, // for later
 
-  //why does kountry kart deli print as room but three needs stays as threeNeeds??
+
 };
 
 // ------------------------------------- PLAN ------------------------------------------------------
@@ -400,7 +407,12 @@ async function play() {
       }
       // EAST
     } else if (inputObject.toLowerCase() === "east") {
-      if (rooms[player.currentRoom.toLowerCase()].east) {
+     
+      if (rooms[player.currentRoom.toLowerCase()].east) { 
+        if (player.currentRoom === hillUp) {
+        console.log (rooms[player.currentRoom].description);
+        process.exit()
+      } else if {
         // this is to find rooms northern room connection
         roomToEast = rooms[player.currentRoom.toLowerCase()].east;
         player.currentRoom = roomToEast.name;
@@ -457,6 +469,7 @@ async function play() {
       }
     } else if (
       // otherwise you cant move forward till you give them the map
+      //PUZZLE/PASS CONDITIONAL 
       player.currentRoom === "church street drunk" &&
       inputObject !== "map"
     ) {
