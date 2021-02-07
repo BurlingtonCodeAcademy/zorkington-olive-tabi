@@ -412,7 +412,7 @@ async function play() {
         if (player.currentRoom === hillUp) {
         console.log (rooms[player.currentRoom].description);
         process.exit()
-      } else if {
+      } else if { 
         // this is to find rooms northern room connection
         roomToEast = rooms[player.currentRoom.toLowerCase()].east;
         player.currentRoom = roomToEast.name;
