@@ -90,8 +90,8 @@ const water = new InvObjectsClass(
   "water",
   "Ahhh water. That will be refreshing later",
   "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 15 sustenance points.",
-  undefined,
-  undefined,
+  // undefined,
+  // undefined,
   [],
   15
 );
@@ -100,8 +100,8 @@ const pizza = new InvObjectsClass(
   "pizza",
   "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... ",
   "NICE! you'll be glad you had that pizza tomorrow...... you gain 20 sustenance points.",
-  undefined,
-  undefined,
+  // undefined,
+  // undefined,
   [],
   20
 );
@@ -110,8 +110,8 @@ const shot = new InvObjectsClass(
   "shot",
   "shots! shots! shots! What's a night out drinking without shots?",
   "Down the hatch.\nAlthough they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
-  undefined,
-  undefined,
+  // undefined,
+  // undefined,
   [],
   1
 );
@@ -120,8 +120,8 @@ const map = new InvObjectsClass(
   "map",
   "I guess you never know when a map of Burlington could come in handy...?",
   "A map is a great way to find your way way around!",
-  undefined,
-  undefined,
+  // undefined,
+  // undefined,
   [],
   0
 );
@@ -130,8 +130,8 @@ const sparkWater = new InvObjectsClass(
   "sparkling water",
   "The fanciest of the waters, you'll be so glad you have this later.....",
   "Wow! So fancy! This really hits the spot...\nYou have gained 30 sustenance points.",
-  undefined,
-  undefined,
+  // undefined,
+  // undefined,
   [],
   30
 );
@@ -150,8 +150,8 @@ const prize = new InvObjectsClass(
   "rise n shiner",
   "It's hot and good and will keep you alive....",
   "With the perfect combo of meat, egg, cheese, and a hashbrown our night is complete.  You gained 50 sustenance points. ",
-  undefined,
-  undefined,
+// undefined,
+  // undefined,
   [],
   50
 );
