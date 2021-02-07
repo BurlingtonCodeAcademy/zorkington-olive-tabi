@@ -158,15 +158,16 @@ const prize = new InvObjectsClass(
 
 // inventory look up table
 let invObjects = {
-  map: map,
-  water: water,
-  still: water,
-  sparkling: sparkWater,
+  "map": map,
+  "water": water,
+  "still": water,
+  "sparkling": sparkWater,
   'sparkling water': sparkWater,
-  shot: shot,
-  food: food,
-  pizza: pizza,
-  sandwich: prize,
+  "shot": shot,
+  "booze":shot,
+  "food": food,
+  "pizza": pizza,
+  "sandwich": prize,
   "rise": prize,
   "shiner": prize,
   "rise n shiner": prize
@@ -463,6 +464,7 @@ async function play() {
       // look at object
       let currentPlayersInventory = player.inventory;
       let item = invObjects[inputObject]
+
       const result = currentPlayersInventory.filter(
         (object) => invObjects[object.name] === item
       );
@@ -475,7 +477,7 @@ async function play() {
           currentPlayersInventory.splice(resultIndex, 1);
         }
         player.susPoints += result[0].susPoints;
-      } else if (result.length === 0) {
+      } else if (result.length === 0) { // do we want to be able to use something without taking it?
         let currentRoomsInventory =
           rooms[player.currentRoom.toLowerCase()].inventory;
         for (let index = 0; index < currentRoomsInventory.length; index++) {
