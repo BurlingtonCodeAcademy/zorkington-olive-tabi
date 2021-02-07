@@ -17,16 +17,18 @@ async function start() {
   const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n You meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... \n\nDo you want to continue your night out?`;
   let answer = await ask(welcomeMessage);
 
-  if (answer === "no") {
+  if (answer === "no" || answer === "n") {
     console.log("Enjoy your lame night in!");
     process.exit();
-  } else {
+  } else if (answer === "yes" || answer === 'y') {
     console.log(
       "You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the north a familiar sight....."
     );
     player.currentRoom = "radio bean";
     return play();
-  }
+  } else {
+    console.log("Sorry, I didn't catch that!")
+    answer = await ask("Do you want to continue your night out?") }
 }
 
 //--------------------------------- TABI + OLIVES CODE ------------------------------------------------
