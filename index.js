@@ -1,3 +1,4 @@
+const { Console } = require("console");
 const readline = require("readline");
 const readlineInterface = readline.createInterface(
   process.stdin,
@@ -23,8 +24,6 @@ async function start() {
     console.log(
       "You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the north a familiar sight....."
     );
-    let firstDirection = await ask("Where would you like to go?");
-    console.log(firstDirection);
     player.currentRoom = "radio bean";
     return play();
   }
@@ -57,19 +56,20 @@ class RoomClass {
 
 //  inventory class
 class InvObjectsClass {
-  constructor(name, description, startingRoom, currentRoom, action, susPoints) {
+  constructor(name, takeDescription, useDescription, action, susPoints) { // i removed starting room, ending room and added a take description and a use description
     this.name = name;
-    this.description = description;
-    this.startingRoom = startingRoom;
-    this.currentRoom = currentRoom || startingRoom; // may need an inventory room for objects to be in...
+    this.takeDescription = takeDescription;
+    this.useDescription = useDescription;
+    // this.startingRoom = startingRoom;
+    // this.currentRoom = currentRoom || startingRoom; // may need an inventory room for objects to be in...
     this.action = action || []; // action array
     this.susPoints = susPoints;
   }
-  obUse(userInputAction) {
-    if (this.action.includes(userInputAction)) {
-      console.log(invObjects.description);
-    }
-  }
+  // obUse(userInputAction) {
+  //   if (this.action.includes(userInputAction)) {
+  //     console.log(invObjects.description);
+  //   }
+  // }
 }
 
 //  user actions look table object
@@ -77,7 +77,7 @@ class InvObjectsClass {
 let userAction = {
   move: ["go", "walk"],
   use: ["use", "play", "get", "drink", "eat", "give"], //tip? ///also, switching order for now
-  take: ["take", "grab", "order"],//added order here for food cart...but it might cause issue of "can't do that later... "
+  take: ["take", "grab", "order"], //added order here for food cart...but it might cause issue of "can't do that later... "
   // open: ["open", "unlock"],
   drop: ["drop"],
   examine: ["examine"],
@@ -88,6 +88,7 @@ let userAction = {
 //  need to define things in objects AFTER we define them... maybe dont need these pieces.. will need to decide
 const water = new InvObjectsClass(
   "water",
+  "Ahhh water. That will be refreshing later",
   "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 15 sustenance points.",
   undefined,
   undefined,
@@ -97,17 +98,18 @@ const water = new InvObjectsClass(
 //adding pizza for extra sus
 const pizza = new InvObjectsClass(
   "pizza",
-  "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... you gain 20 sustenance points.",
+  "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... ",
+  "NICE! you'll be glad you had that pizza tomorrow...... you gain 20 sustenance points.",
   undefined,
   undefined,
   [],
   20
 );
 
-
 const shot = new InvObjectsClass(
   "shot",
-  "shots! shots! shots! What's a night out drinking without shots?\n Although they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
+  "shots! shots! shots! What's a night out drinking without shots?",
+  "Down the hatch.\nAlthough they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
   undefined,
   undefined,
   [],
@@ -117,6 +119,7 @@ const shot = new InvObjectsClass(
 const map = new InvObjectsClass(
   "map",
   "I guess you never know when a map of Burlington could come in handy...?",
+  "A map is a great way to find your way way around!",
   undefined,
   undefined,
   [],
@@ -125,6 +128,7 @@ const map = new InvObjectsClass(
 
 const sparkWater = new InvObjectsClass(
   "sparkling water",
+  "The fanciest of the waters, you'll be so glad you have this later.....",
   "Wow! So fancy! This really hits the spot...\nYou have gained 30 sustenance points.",
   undefined,
   undefined,
@@ -134,6 +138,7 @@ const sparkWater = new InvObjectsClass(
 
 const food = new InvObjectsClass(
   "food",
+  "MMMMMHHHHHHHH, that smells good.....",
   "I was absolutely famished! Nothing like a late night street meat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
   undefined,
   undefined,
@@ -142,8 +147,9 @@ const food = new InvObjectsClass(
 );
 
 const prize = new InvObjectsClass(
-  "sandwich",
+  "rise n shiner",
   "It's hot and good and will keep you alive....",
+  "With the perfect combo of meat, egg, cheese, and a hashbrown our night is complete.  You gained 50 sustenance points. ",
   undefined,
   undefined,
   [],
@@ -155,12 +161,15 @@ let invObjects = {
   map: map,
   water: water,
   still: water,
-  "sparkling water": sparkWater,
+  sparkling: sparkWater,
+  'sparkling water': sparkWater,
   shot: shot,
   food: food,
   pizza: pizza,
   sandwich: prize,
-  "rise n shiner" : prize
+  "rise": prize,
+  "shiner": prize,
+  "rise n shiner": prize
 };
 //roomClass for all rooms below
 const radioBean = new RoomClass(
@@ -324,7 +333,7 @@ const rooms = {
   "radio bean": radioBean,
   "church street one": churchStreetOne, // N = church 2, E = needs
   threeneeds: threeNeeds, // E = pool room, W = church street one
-  //"Three Needs" : threeNeeds,// - can we get three needs to print better? 
+  //"Three Needs" : threeNeeds,// - can we get three needs to print better?
   "threeneeds pool room": threeNeedsPoolRoom,
   //"Three Needs pool room": threeNeedsPoolRoom,
   "church street two": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
@@ -342,7 +351,6 @@ const rooms = {
   //  'pearl st. hill': hillUp, // for later
 
   //why does kountry kart deli print as room but three needs stays as threeNeeds??
-
 };
 
 // ------------------------------------- PLAN ------------------------------------------------------
@@ -420,7 +428,9 @@ async function play() {
     } // could add a "i dont understand here" otherwise will keep looping..
     //  Actions! USE
   } else if (userAction.use.includes(inputAction)) {
+    //  conditionally set the puzzle.. if the room is church street drunk then you need to use the map to continue.. 
     if (player.currentRoom === "church street drunk" && inputObject === "map") {
+      // if you do use the map that unlocks the next block and makes this block obsolete...
       console.log("The drunk people thank you for your map...");
       churchStreetDrunk.north = churchStreetFour;
       churchStreetThree.north = churchStreetFour;
@@ -431,7 +441,7 @@ async function play() {
       );
 
       if (result.length > 0) {
-        console.log(result[0].description);
+        console.log(result[0].useDescription);
         resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
         // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
         if (resultIndex > -1) {
@@ -440,6 +450,7 @@ async function play() {
         player.susPoints += result[0].susPoints;
       }
     } else if (
+      // otherwise you cant move forward till you give them the map
       player.currentRoom === "church street drunk" &&
       inputObject !== "map"
     ) {
@@ -451,13 +462,14 @@ async function play() {
       // if the action is in the use lookup table
       // look at object
       let currentPlayersInventory = player.inventory;
+      let item = invObjects[inputObject]
       const result = currentPlayersInventory.filter(
-        (object) => object.name === inputObject
+        (object) => invObjects[object.name] === item
       );
 
       if (result.length > 0) {
-        console.log(result[0].description);
-        resultIndex = currentPlayersInventory.indexOf(invObjects[inputObject]);
+        console.log(result[0].useDescription);
+        resultIndex = currentPlayersInventory.indexOf(item);
         // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
         if (resultIndex > -1) {
           currentPlayersInventory.splice(resultIndex, 1);
@@ -467,8 +479,8 @@ async function play() {
         let currentRoomsInventory =
           rooms[player.currentRoom.toLowerCase()].inventory;
         for (let index = 0; index < currentRoomsInventory.length; index++) {
-          if (currentRoomsInventory[index].name === inputObject) {
-            console.log(currentRoomsInventory[index].description);
+          if (invObjects[currentRoomsInventory[index].name] === item) {
+            console.log(currentRoomsInventory[index].useDescription);
             player.susPoints += currentRoomsInventory[index].susPoints;
             break;
           }
@@ -486,17 +498,24 @@ async function play() {
     let currentRoomsInventory =
       rooms[player.currentRoom.toLowerCase()].inventory;
     // returns empty array if not in room, and array with length one if in room
+    let item = invObjects[inputObject]
     const result = currentRoomsInventory.filter(
-      (object) => object.name === inputObject
+      (object) => invObjects[object.name] === item
     );
+
     //  if length is 1 then print description, add to player inventory and take out of room inventory
     if (result.length > 0) {
       console.log(
-        "You took the " + inputObject + ".\n\n" + result[0].description
+        "You took the " + inputObject + ".\n\n" + result[0].takeDescription
       );
-      player.inventory.push(invObjects[inputObject]);
+      player.inventory.push(item);
       // index where object is in room inventory
-      resultIndex = currentRoomsInventory.indexOf(invObjects[inputObject]);
+      // if (inputObject === "sparkling water") {
+      //   inputObject = "sparkling";
+      // } else if (inputObject === "rise n shiner"){
+      //   inputObject = "rise"
+      // }
+      resultIndex = currentRoomsInventory.indexOf(item);
       // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
       if (resultIndex > -1) {
         currentRoomsInventory.splice(resultIndex, 1);
@@ -534,9 +553,13 @@ async function play() {
   } else if (userAction.inventory.includes(inputAction)) {
     let currentPlayersInventory = player.inventory;
     // returns empty array if not in room, and array with length one if in room
-    const result = currentPlayersInventory.map((object) => object.name);
-//inventory, suspoints
-    console.log(result);
+    if (currentPlayersInventory.length === 0) {
+      console.log("You don't have anything in your inventory....");
+    } else {
+      const result = currentPlayersInventory.map((object) => object.name);
+      console.log(result);
+    }
+    //inventory, suspoints
     console.log("Your current sustenance points are " + player.susPoints);
   } else {
     console.log("you can't do that");
@@ -550,16 +573,7 @@ async function play() {
 
 /*
 
-
-//  structure hypothetical
-
-//  print inventory if user enters i
-let userInput = await ask(What do you want to do...);
-
-if (userInput === 'i'){
-  console.log(player.inventory);
-}
-
-
 get three needs to print better?
 */
+//  objects need take description and use description
+//  need win condition
