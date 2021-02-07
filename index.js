@@ -11,11 +11,13 @@ function ask(questionText) {
   });
 }
 
+const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n You meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `;  //  \n\nDo you want to continue your night out?`;
+console.log(welcomeMessage);
 start();
 
+
 async function start() {
-  const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n You meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... \n\nDo you want to continue your night out?`;
-  let answer = await ask(welcomeMessage);
+  let answer = await ask("\n\nDo you want to continue your night out?");
 
   if (answer === "no" || answer === "n") {
     console.log("Enjoy your lame night in!");
@@ -28,7 +30,7 @@ async function start() {
     return play();
   } else {
     console.log("Sorry, I didn't catch that!")
-    answer = await ask("Do you want to continue your night out?") }
+   return start();}
 }
 
 //--------------------------------- TABI + OLIVES CODE ------------------------------------------------
