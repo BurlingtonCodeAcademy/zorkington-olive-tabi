@@ -11,7 +11,8 @@ function ask(questionText) {
   });
 }
 // welcome message doesn't go back to this
-const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n\nYou meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `; 
+const welcomeMessage = `Welcome to Olive n' Tabi's Totally Bogus Text Adventure Game.\nTo navigate through the the fabulous city of Burlington, VT - you'll want to tell us where to go with commands such as: 'go' or 'move' and in whatever direction you choose. \nBurlington is full of exciting things to play with... as well as fun food and beverages to consume. To interact with these, you'll find most common commands, such as 'eat', 'drink', or 'take' will work.\n. Just remember... with any boozy night out - it is REALLY important to stay hydrated and eat snacks along the way....\n
+\n\nThe year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n\nYou meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `; 
 console.log(welcomeMessage);
 start();
 
@@ -151,6 +152,14 @@ const prize = new InvObjectsClass(
   50
 );
 
+const phone = new InvObjectsClass (
+  "phone",
+  "Yo dude! You can't take that!\n I know it looks like your phone (it doesn't), but it's not yours...",
+  "Trust me... even with a different number, your ex will still realize who this is.\n Better off just not using a phone right now.",
+  [],
+  0
+);
+
 // inventory look up table
 let invObjects = {
   "map": map,
@@ -163,7 +172,8 @@ let invObjects = {
   "drink": shot,
   "food": food,
   "pizza": food,
-  "za":food,
+  "phone" : phone,
+  "za": food,
   "sandwich": prize,
   "rise": prize,
   "shiner": prize,
@@ -223,8 +233,8 @@ const foodCart = new RoomClass(
 
 const finnegans = new RoomClass(
   "Finnegans",
-  "\nIts a little dark, its a little smelly, but the beer is good and the companies even better.  Not much to do here but head to the bar.....",
-  [shot],
+  "\nIts a little dark, its a little smelly, but the beer is good and the companies even better.\n Looks like there's nothing to do, but get a dri--Wait... Is that your phone? You don't remember dropping it.",
+  [shot, phone],
   null,
   null,
   null,
@@ -486,9 +496,19 @@ async function play() {
         // if the action is in the use lookup table
         // look at object
         let currentPlayersInventory = player.inventory;
-        // console.log(inputObject); // pizza
         let item = invObjects[inputObject];
-        if (item) { // while the item is true... i.e. exists in our game...
+      if (item.name === "phone") {
+        console.log(item.useDescription)
+      //   const result = currentPlayersInventory.filter(
+      //     (object) => invObjects[object.name] === item
+      //   );
+        
+      //   if (result.length > 0) {
+      //     console.log(result[0].useDescription);
+      // } 
+    } 
+
+      else if (item) { // while the item is true... i.e. exists in our game...
         const result = currentPlayersInventory.filter(
           (object) => invObjects[object.name] === item
         );
@@ -535,6 +555,7 @@ async function play() {
         rooms[player.currentRoom.toLowerCase()].inventory;
       // returns empty array if not in room, and array with length one if in room
       let item = invObjects[inputObject];
+
       if (item){
       const result = currentRoomsInventory.filter(
         (object) => invObjects[object.name] === item
@@ -542,6 +563,10 @@ async function play() {
 
       //  if length is 1 then print description, add to player inventory and take out of room inventory
       if (result.length > 0) {
+        if (item.name === "phone") {
+          console.log(item.takeDescription)
+        return play();
+      }
         console.log(
           "You took the " + inputObject + ".\n\n" + result[0].takeDescription
         );
