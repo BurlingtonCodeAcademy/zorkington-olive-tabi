@@ -535,6 +535,7 @@ async function play() {
         rooms[player.currentRoom.toLowerCase()].inventory;
       // returns empty array if not in room, and array with length one if in room
       let item = invObjects[inputObject];
+      if (item){
       const result = currentRoomsInventory.filter(
         (object) => invObjects[object.name] === item
       );
@@ -558,7 +559,11 @@ async function play() {
         }
       } else {
         console.log("you cant take that");
-      }
+      } return play ();
+    } else {
+      console.log("\nI don't know what a " + inputObject + " is.")
+    }
+    return play();
     } else if (userAction.drop.includes(inputAction)) {
       // look at object
       let currentPlayersInventory = player.inventory;
