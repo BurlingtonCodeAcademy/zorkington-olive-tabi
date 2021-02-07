@@ -24,7 +24,7 @@ async function start() {
     process.exit();
   } else if (answer === "yes" || answer === 'y') {
     console.log(
-      "You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the north a familiar sight....."
+      "You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the south a familiar sight....."
     );
     player.currentRoom = "radio bean";
     return play();
@@ -100,15 +100,15 @@ const water = new InvObjectsClass(
   15
 );
 //adding pizza for extra sus
-const pizza = new InvObjectsClass(
-  "pizza",
-  "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... ",
-  "NICE! you'll be glad you had that pizza tomorrow...... you gain 20 sustenance points.",
-  // undefined,
-  // undefined,
-  [],
-  20
-);
+// const pizza = new InvObjectsClass(
+//   "pizza",
+//   "Damn, nothing better than a hot slice of 'za to keep the party rollin'..... ",
+//   "NICE! you'll be glad you had that pizza tomorrow...... you gain 20 sustenance points.",
+//   // undefined,
+//   // undefined,
+//   [],
+//   20
+// );
 
 const shot = new InvObjectsClass(
   "shot",
@@ -143,9 +143,9 @@ const sparkWater = new InvObjectsClass(
 const food = new InvObjectsClass(
   "food",
   "MMMMMHHHHHHHH, that smells good.....",
-  "I was absolutely famished! Nothing like a late night street meat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
-  undefined,
-  undefined,
+  "I was absolutely famished! Nothing like a late night street treat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
+  //ndefined,
+  //undefined,
   [],
   30
 );
@@ -169,8 +169,9 @@ let invObjects = {
   'sparkling water': sparkWater,
   "shot": shot,
   "booze":shot,
+  "drink":shot,
   "food": food,
-  "pizza": pizza,
+  "pizza": food,
   "sandwich": prize,
   "rise": prize,
   "shiner": prize,
@@ -189,7 +190,7 @@ const radioBean = new RoomClass(
 
 const churchStreetOne = new RoomClass(
   "Church Street One",
-  "Church street stretches out ahead of you to the north, to the east you see the three needs.  There doesn't seem to be a line.",
+  "Church street stretches out ahead of you to the south, to the east you see the three needs.  There doesn't seem to be a line.",
   [],
   null,
   null,
@@ -200,7 +201,7 @@ const churchStreetOne = new RoomClass(
 const threeNeeds = new RoomClass(
   "threeNeeds",
   "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, eat a slizzing slice of 'za, or continue on east to the pool room.",
-  [water, shot, pizza],
+  [water, shot, food],
   null,
   null,
   null,
@@ -310,24 +311,24 @@ const churchStreetDrunk = new RoomClass(
 ///DIRECTIONALS
 
 //  manually modifying/adding room connections
-radioBean.north = churchStreetOne;
-churchStreetOne.north = churchStreetTwo;
+radioBean.south = churchStreetOne;
+churchStreetOne.south = churchStreetTwo;
 churchStreetOne.east = threeNeeds;
 threeNeeds.east = threeNeedsPoolRoom;
 threeNeeds.west = churchStreetOne;
 threeNeedsPoolRoom.west = threeNeeds;
-churchStreetTwo.north = churchStreetThree;
-churchStreetTwo.south = churchStreetOne;
+churchStreetTwo.south = churchStreetThree;
+churchStreetTwo.north = churchStreetOne;
 churchStreetTwo.east = foodCart;
 foodCart.west = churchStreetTwo;
-churchStreetThree.south = churchStreetTwo;
+churchStreetThree.north = churchStreetTwo;
 churchStreetThree.east = finnegans;
 churchStreetThree.west = deli126;
-churchStreetThree.north = churchStreetDrunk;
+churchStreetThree.south = churchStreetDrunk;
 finnegans.west = churchStreetThree;
 deli126.east = churchStreetThree;
-churchStreetDrunk.south = churchStreetThree;
-churchStreetFour.south = churchStreetThree;
+churchStreetDrunk.north = churchStreetThree;
+churchStreetFour.north = churchStreetThree;
 churchStreetFour.east = redSquare;
 churchStreetFour.west = kkd;
 redSquare.west = churchStreetFour;
@@ -336,19 +337,19 @@ kkd.east = churchStreetFour;
 // room lookup table object
 const rooms = {
   "radio bean": radioBean,
-  "church street one": churchStreetOne, // N = church 2, E = needs
+  "church street one": churchStreetOne, // s = church 2, E = needs
   threeneeds: threeNeeds, // E = pool room, W = church street one
   //"Three Needs" : threeNeeds,// - can we get three needs to print better?
   "threeneeds pool room": threeNeedsPoolRoom,
   //"Three Needs pool room": threeNeedsPoolRoom,
-  "church street two": churchStreetTwo, // N = church st 3, S = church street one, E = food cart
+  "church street two": churchStreetTwo, // s = church st 3, N = church street one, E = food cart
   "food cart": foodCart, // W = church street 2,
-  "church street three": churchStreetThree, // S = church street 2, E = finns, W = deli 126, N = church street 4
+  "church street three": churchStreetThree, // N = church street 2, E = finns, W = deli 126, S = church street 4
   finnegans: finnegans, // W = church street 3
   deli: deli126, // E = church street 3
   "deli 126": deli126, // E = church street 3
-  "church street drunk": churchStreetDrunk, // N = conditional (if use.map then n = churchstreet 4), S= church street three
-  "church street four": churchStreetFour, // E = red square, W = kkd, S = church street 3
+  "church street drunk": churchStreetDrunk, // S = conditional (if use.map then S = churchstreet 4), N= church street three
+  "church street four": churchStreetFour, // E = red square, W = kkd, N = church street 3
   "red square": redSquare, // W = church street 4
   kkd: kkd, // E = church street 4
   "kountry kart deli": kkd, // same as above
@@ -437,8 +438,8 @@ async function play() {
     if (player.currentRoom === "church street drunk" && inputObject === "map") {
       // if you do use the map that unlocks the next block and makes this block obsolete...
       console.log("The drunk people thank you for your map...");
-      churchStreetDrunk.north = churchStreetFour;
-      churchStreetThree.north = churchStreetFour;
+      churchStreetDrunk.south = churchStreetFour;
+      churchStreetThree.south = churchStreetFour;
 
       let currentPlayersInventory = player.inventory;
       const result = currentPlayersInventory.filter(
@@ -462,7 +463,7 @@ async function play() {
       console.log(
         "They won't let you pass.. Can you help them with directions?"
       );
-      return churchStreetDrunk.north === null;
+      return churchStreetDrunk.south === null;
     } else {
       // if the action is in the use lookup table
       // look at object
@@ -484,8 +485,10 @@ async function play() {
       } else if (result.length === 0) { // do we want to be able to use something without taking it?
         let currentRoomsInventory =
           rooms[player.currentRoom.toLowerCase()].inventory;
-        for (let index = 0; index < currentRoomsInventory.length; index++) {
-          if (invObjects[currentRoomsInventory[index].name] === item) {
+          console.log(currentRoomsInventory);
+        for (let index = 0; index < currentRoomsInventory.length; index++)
+        { console.log (invObjects[currentRoomsInventory[index].name].name)
+          if (invObjects[currentRoomsInventory[index].name].name === item) {
             console.log(currentRoomsInventory[index].useDescription);
             player.susPoints += currentRoomsInventory[index].susPoints;
             break;
