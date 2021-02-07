@@ -40,8 +40,8 @@ let player = {
   name: [],
   inventory: [],
   currentRoom: [],
-  susPoints: 0,
-
+  susPoints: 90, // change bakc to 0
+ 
   //moveRoom : function() {}
 };
 
@@ -93,11 +93,11 @@ let userAction = {
 const water = new InvObjectsClass(
   "water",
   "Ahhh water. That will be refreshing later",
-  "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 15 sustenance points.",
+  "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 10 sustenance points.",
   // undefined,
   // undefined,
   [],
-  15
+  10
 );
 
 
@@ -124,21 +124,21 @@ const map = new InvObjectsClass(
 const sparkWater = new InvObjectsClass(
   "sparkling water",
   "The fanciest of the waters, you'll be so glad you have this later.....",
-  "Wow! So fancy! This really hits the spot...\nYou have gained 30 sustenance points.",
+  "Wow! So fancy! This really hits the spot...\nYou have gained 15 sustenance points.",
   // undefined,
   // undefined,
   [],
-  30
+  15
 );
 
 const food = new InvObjectsClass(
   "food",
   "MMMMMHHHHHHHH, that smells good.....",
-  "I was absolutely famished! Nothing like a late night street treat to REALLY keep me goin'\nLooks like you really needed that. You gained 30 sustenance points. ",
+  "I was absolutely famished! Nothing like a late night street treat to REALLY keep me goin'\nLooks like you really needed that. You gained 20 sustenance points. ",
   //ndefined,
   //undefined,
   [],
-  30
+  20
 );
 
 const prize = new InvObjectsClass(
@@ -203,7 +203,7 @@ const threeNeeds = new RoomClass(
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
   "The pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
-  [map, water, shot],
+  [map, shot],
   null,
   null,
   null,
@@ -376,6 +376,7 @@ const rooms = {
 //  4) at end want to jump to very top of play function...  will take you to top of function.. return function(); recursive loop
 
 async function play() {
+  while(player.susPoints < 100){
   //  sanitize
   let input = await ask(
     `Current Room: ${player.currentRoom} \nWhat would you like to do....\n\n>_`
@@ -409,14 +410,14 @@ async function play() {
     } else if (inputObject.toLowerCase() === "east") {
      
       if (rooms[player.currentRoom.toLowerCase()].east) { 
-        if (player.currentRoom === hillUp) {
-        console.log (rooms[player.currentRoom].description);
-        process.exit()
-      } else if {
         // this is to find rooms northern room connection
         roomToEast = rooms[player.currentRoom.toLowerCase()].east;
+        if (roomToEast.name === "hill up") {
+          console.log (roomToEast.description);
+          process.exit()
+        } else {  
         player.currentRoom = roomToEast.name;
-        console.log(roomToEast.description);
+        console.log(roomToEast.description);}
         // console.log(`changing currentRoom to ${roomToEast.name}`);
       } else {
         console.log("you can't go that way");
@@ -504,7 +505,6 @@ async function play() {
         // { console.log (invObjects[currentRoomsInventory[index].name].name); // water,shot, food REMOVE
           // console.log(item.name); // food object REMOVE
           if (invObjects[currentRoomsInventory[index].name].name === item.name) {
-            console.log("you're in the loop") // remove
             console.log(currentRoomsInventory[index].useDescription);
             player.susPoints += currentRoomsInventory[index].susPoints;
             //  break;
@@ -592,6 +592,23 @@ async function play() {
   }
   return play();
 }
+console.log("Congratulations on the fun night out!! With Bob by your side and a shiner in hand, you have successfully not blacked out!")
+let playAgain = await ask("would you like to play again?")
+
+function playAgainFunction (playAgain){
+  if( playAgain.trim() === 'yes' || playAgain.trim() ==='yes'){
+    return start();
+  } else if (playAgain.trim() === 'no' || playAgain.trim() === 'n'){
+    console.log("Thanks for playing;")
+    process.exit();
+  } else {
+    console.log("Sorry, I didn't quite get that...");
+    // playAgain = await ask("would you like to play again?")
+    return playAgain();
+  }
+}
+
+}
 
 //need to trouble shoot when ordering something... doesn't prompt "you can't"
 
@@ -602,4 +619,4 @@ async function play() {
 get three needs to print better?
 */
 //  objects need take description and use description
-//  need win condition
+//  need win conditio
