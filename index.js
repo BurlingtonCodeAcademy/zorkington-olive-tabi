@@ -468,6 +468,7 @@ async function play() {
       // if the action is in the use lookup table
       // look at object
       let currentPlayersInventory = player.inventory;
+      // console.log(inputObject); // pizza
       let item = invObjects[inputObject]
 
       const result = currentPlayersInventory.filter(
@@ -485,18 +486,21 @@ async function play() {
       } else if (result.length === 0) { // do we want to be able to use something without taking it?
         let currentRoomsInventory =
           rooms[player.currentRoom.toLowerCase()].inventory;
-          console.log(currentRoomsInventory);
+          // console.log(currentRoomsInventory); // array of items REMOVE
         for (let index = 0; index < currentRoomsInventory.length; index++)
-        { console.log (invObjects[currentRoomsInventory[index].name].name)
-          if (invObjects[currentRoomsInventory[index].name].name === item) {
+        // { console.log (invObjects[currentRoomsInventory[index].name].name); // water,shot, food REMOVE
+          // console.log(item.name); // food object REMOVE
+          if (invObjects[currentRoomsInventory[index].name].name === item.name) {
+            console.log("you're in the loop") // remove
             console.log(currentRoomsInventory[index].useDescription);
             player.susPoints += currentRoomsInventory[index].susPoints;
-            break;
+            //  break;
           }
-          break;
-        }
-      } else {
-        console.log("i don't know");
+          //  break;
+        } else {
+          console.log("i don't know");
+        // console.log("Try adding this to your inventory before using it...")
+      // } 
       }
       // ACTION: TAKE
       // adding to player.inventory
