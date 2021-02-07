@@ -11,7 +11,7 @@ function ask(questionText) {
   });
 }
 // welcome message doesn't go back to this
-const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n You meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `; //  \n\nDo you want to continue your night out?`;
+const welcomeMessage = `The year is 2050.  Covid-19 has just been eradicated and you are now aloud to go out! \n\nYou meet your friends at your favorite spot for ONE drink.  As you finish, your friends ask if the night should continue... `; //  \n\nDo you want to continue your night out?`;
 console.log(welcomeMessage);
 start();
 
@@ -23,12 +23,12 @@ async function start() {
     process.exit();
   } else if (answer === "yes" || answer === "y") {
     console.log(
-      "You exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the south a familiar sight....."
+      "\nYou exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the south a familiar sight....."
     );
     player.currentRoom = "radio bean"; //brings us to current/starting room
     return play();
   } else {
-    console.log("Sorry, I didn't catch that!");
+    console.log("\nSorry, I didn't catch that!");
     return start();
   }
 }
@@ -93,8 +93,8 @@ let userAction = {
 //  need to define things in objects AFTER we define them... maybe dont need these pieces.. will need to decide
 const water = new InvObjectsClass(
   "water",
-  "Ahhh water. That will be refreshing later",
-  "Ah, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 10 sustenance points.",
+  "\nAhhh water. That will be refreshing later",
+  "\nAh, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 10 sustenance points.",
   // undefined,
   // undefined,
   [],
@@ -103,8 +103,8 @@ const water = new InvObjectsClass(
 
 const shot = new InvObjectsClass(
   "shot",
-  "shots! shots! shots! What's a night out drinking without shots?",
-  "Down the hatch.\nAlthough they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
+  "\nshots! shots! shots! What's a night out drinking without shots?",
+  "\nDown the hatch.\nAlthough they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
   // undefined,
   // undefined,
   [],
@@ -113,8 +113,8 @@ const shot = new InvObjectsClass(
 
 const map = new InvObjectsClass(
   "map",
-  "I guess you never know when a map of Burlington could come in handy...?",
-  "A map is a great way to find your way way around!",
+  "\nI guess you never know when a map of Burlington could come in handy...?",
+  "\nA map is a great way to find your way way around!",
   // undefined,
   // undefined,
   [],
@@ -123,8 +123,8 @@ const map = new InvObjectsClass(
 
 const sparkWater = new InvObjectsClass(
   "sparkling water",
-  "The fanciest of the waters, you'll be so glad you have this later.....",
-  "Wow! So fancy! This really hits the spot...\nYou have gained 15 sustenance points.",
+  "\nThe fanciest of the waters, you'll be so glad you have this later.....",
+  "\nWow! So fancy! This really hits the spot...\nYou have gained 15 sustenance points.",
   // undefined,
   // undefined,
   [],
@@ -133,8 +133,8 @@ const sparkWater = new InvObjectsClass(
 
 const food = new InvObjectsClass(
   "food",
-  "MMMMMHHHHHHHH, that smells good.....",
-  "I was absolutely famished! Nothing like a late night street treat to REALLY keep me goin'\nLooks like you really needed that. You gained 20 sustenance points. ",
+  "\nMMMMMHHHHHHHH, that smells good.....",
+  "\nI was absolutely famished! Nothing like a late night street treat to REALLY keep me goin'\nLooks like you really needed that. You gained 20 sustenance points. ",
   //ndefined,
   //undefined,
   [],
@@ -143,8 +143,8 @@ const food = new InvObjectsClass(
 
 const prize = new InvObjectsClass(
   "rise n shiner",
-  "It's hot and good and will keep you alive....",
-  "With the perfect combo of meat, egg, cheese, and a hashbrown our night is complete.  You gained 50 sustenance points. ",
+  "\nIt's hot and good and will keep you alive....",
+  "\nWith the perfect combo of meat, egg, cheese, and a hashbrown our night is complete.  You gained 50 sustenance points. ",
   // undefined,
   // undefined,
   [],
@@ -153,19 +153,20 @@ const prize = new InvObjectsClass(
 
 // inventory look up table
 let invObjects = {
-  map: map,
-  water: water,
-  still: water,
-  sparkling: sparkWater,
+  "map": map,
+  "water": water,
+  "still": water,
+  "sparkling": sparkWater,
   "sparkling water": sparkWater,
-  shot: shot,
-  booze: shot,
-  drink: shot,
-  food: food,
-  pizza: food,
-  sandwich: prize,
-  rise: prize,
-  shiner: prize,
+  "shot": shot,
+  "booze": shot,
+  "drink": shot,
+  "food": food,
+  "pizza": food,
+  "za":food,
+  "sandwich": prize,
+  "rise": prize,
+  "shiner": prize,
   "rise n shiner": prize,
 };
 //roomClass for all rooms below
@@ -182,7 +183,7 @@ const radioBean = new RoomClass(
 
 const churchStreetOne = new RoomClass(
   "Church Street One",
-  "Church street stretches out ahead of you to the south, to the east you see the three needs.  There doesn't seem to be a line.",
+  "\nChurch street stretches out ahead of you to the south, to the east you see the three needs.  There doesn't seem to be a line.",
   [],
   null,
   null,
@@ -192,7 +193,7 @@ const churchStreetOne = new RoomClass(
 
 const threeNeeds = new RoomClass(
   "threeNeeds",
-  "Oh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, eat a slizzing slice of 'za, or continue on east to the pool room.",
+  "\nOh boy... did you miss this place. You enter the Three Needs. You go up the stairs, show your ID, and your permitted into the main room.\n You could order a drink at the bar, eat a slizzing slice of 'za, or continue on east to the pool room.",
   [water, shot, food],
   null,
   null,
@@ -202,7 +203,7 @@ const threeNeeds = new RoomClass(
 //map is here for puzzle!!
 const threeNeedsPoolRoom = new RoomClass(
   "threeNeeds pool room",
-  "The pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
+  "\nThe pool room. Sometimes the only chance you have of getting a quick drink on a busy night.\n Here you can get a drink, but over by the additional pool tables you notice something interesting... is it, a map of Burlington?",
   [map, shot],
   null,
   null,
@@ -212,7 +213,7 @@ const threeNeedsPoolRoom = new RoomClass(
 
 const foodCart = new RoomClass(
   "Food Cart",
-  "Hmmm... the smells of sweet snacks waft your way. The guy working the cart wants to know if you want to order anything.",
+  "\nHmmm... the smells of sweet snacks waft your way. The guy working the cart wants to know if you want to order anything.",
   [water, food],
   null,
   null,
@@ -222,7 +223,7 @@ const foodCart = new RoomClass(
 
 const finnegans = new RoomClass(
   "Finnegans",
-  "Its a little dark, its a little smelly, but the beer is good and the companies even better.  Not much to do here but head to the bar.....",
+  "\nIts a little dark, its a little smelly, but the beer is good and the companies even better.  Not much to do here but head to the bar.....",
   [shot],
   null,
   null,
@@ -232,7 +233,7 @@ const finnegans = new RoomClass(
 
 const deli126 = new RoomClass(
   "Deli 126",
-  "This place seems a little fancier than most.  When you approach the bar the bar tender asks if you want some water... sparkling or still",
+  "\nThis place seems a little fancier than most.  When you approach the bar the bar tender asks if you want some water... sparkling or still",
   [shot, water, sparkWater],
   null,
   null,
@@ -242,7 +243,7 @@ const deli126 = new RoomClass(
 
 const redSquare = new RoomClass(
   "Red Square",
-  "The bass is bumping and the night is getting late... is anyone in here even 21?? The bar lies ahead... ",
+  "\nThe bass is bumping and the night is getting late... is anyone in here even 21?? The bar lies ahead... ",
   [shot],
   null,
   null,
@@ -253,7 +254,7 @@ const redSquare = new RoomClass(
 //win conditional will be here
 const kkd = new RoomClass(
   "Kountry Kart Deli",
-  "As the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob",
+  "\nAs the night comes to end, the drunks stagger in... you're blinded by the sharp fluorescents of KKD. But its all well, well worth it for two reasons. The glory of your well-earned, greasy Rise N' Shiner. And more importantly, the presence of the all-powerful Bob",
   [prize, water],
   null,
   null,
@@ -263,7 +264,7 @@ const kkd = new RoomClass(
 
 const churchStreetTwo = new RoomClass(
   "Church Street Two",
-  "Church street stretches out ahead of you to the north and south, and to the east you see a food cart.  There are people everywhere.",
+  "\nChurch street stretches out ahead of you to the north and south, and to the east you see a food cart.  There are people everywhere.",
   [],
   null,
   null,
@@ -273,7 +274,7 @@ const churchStreetTwo = new RoomClass(
 
 const churchStreetThree = new RoomClass(
   "Church Street Three",
-  "Church street stretches out ahead of you to the north and south.  To the east Finnegans and west is Deli 126.",
+  "\nChurch street stretches out ahead of you to the north and south.  To the east Finnegans and west is Deli 126.",
   [],
   null,
   null,
@@ -283,7 +284,7 @@ const churchStreetThree = new RoomClass(
 
 const churchStreetFour = new RoomClass(
   "Church Street Four",
-  "Church street stretches out ahead of you to the north and south.  To the east Red Square and west is kkd.",
+  "\nChurch street stretches out ahead of you to the north and south.  To the east Red Square and west is kkd.",
   [],
   null,
   null,
@@ -293,7 +294,7 @@ const churchStreetFour = new RoomClass(
 
 const churchStreetDrunk = new RoomClass(
   "church street drunk",
-  "A mob of drunk tourists swarm you... they're mumbling something about being lost... you can't get by...\nThey won't let you through until you help them! They need directions!! ",
+  "\nA mob of drunk tourists swarm you... they're mumbling something about being lost... you can't get by...\nThey won't let you through until you help them! They need directions!! ",
   [],
   null,
   null,
@@ -303,7 +304,7 @@ const churchStreetDrunk = new RoomClass(
 
 const hillUp = new RoomClass(
   "hill up",
-  "Oof. You are in no capacity to walk up the hill to UVM... you try, you quickly fail... your night is over.\n Better luck next time!",
+  "\nOof. You are in no capacity to walk up the hill to UVM... you try, you quickly fail... your night is over.\n Better luck next time!",
   [],
   null,
   null,
@@ -445,13 +446,14 @@ async function play() {
       } // could add a "i dont understand here" otherwise will keep looping..
       //  Actions! USE
     } else if (userAction.use.includes(inputAction)) {
+      //PUZZLE/PASS CONDITIONAL
       //  conditionally set the puzzle.. if the room is church street drunk then you need to use the map to continue..
       if (
         player.currentRoom === "church street drunk" &&
         inputObject === "map"
       ) {
         // if you do use the map that unlocks the next block and makes this block obsolete...
-        console.log("The drunk people thank you for your map...");
+        console.log("\nThe drunk people thank you for your map...");
         churchStreetDrunk.south = churchStreetFour;
         churchStreetThree.south = churchStreetFour;
 
@@ -473,12 +475,11 @@ async function play() {
         }
       } else if (
         // otherwise you cant move forward till you give them the map
-        //PUZZLE/PASS CONDITIONAL
         player.currentRoom === "church street drunk" &&
         inputObject !== "map"
       ) {
         console.log(
-          "They won't let you pass.. Can you help them with directions?"
+          "\nThey won't let you pass.. Can you help them with directions?"
         );
         return churchStreetDrunk.south === null;
       } else {
@@ -487,11 +488,11 @@ async function play() {
         let currentPlayersInventory = player.inventory;
         // console.log(inputObject); // pizza
         let item = invObjects[inputObject];
-
+        if (item) { // while the item is true... i.e. exists in our game...
         const result = currentPlayersInventory.filter(
           (object) => invObjects[object.name] === item
         );
-
+        
         if (result.length > 0) {
           console.log(result[0].useDescription);
           resultIndex = currentPlayersInventory.indexOf(item);
@@ -515,15 +516,18 @@ async function play() {
               player.susPoints += currentRoomsInventory[index].susPoints;
               //  break;
             }
-          //  break;
-        } else {
-          console.log("i don't know");
+          // break;
+        } 
+      } else {
+          console.log("\nI don't know what a " + inputObject + " is.");
           // console.log("Try adding this to your inventory before using it...")
           // }
         }
+        return play();
+      }
         // ACTION: TAKE
         // adding to player.inventory
-      }
+      
     } else if (userAction.take.includes(inputAction)) {
       // if the action is in the use lookup table
       // look at object
@@ -594,14 +598,15 @@ async function play() {
       //inventory, suspoints
       console.log("Your current sustenance points are " + player.susPoints);
     } else {
-      console.log("you can't do that");
+       console.log("\nI don't know how to " + inputAction)
+      // console.log("\nyou can't do that");
     }
     return play();
   }
   console.log(
-    "Congratulations on the fun night out!! With Bob by your side and a shiner in hand, you have successfully not blacked out!"
+    "\nCongratulations on the fun night out!! With Bob by your side and a shiner in hand, you have successfully not blacked out!"
   );
-  let playAgain = await ask("would you like to play again?");
+  let playAgain = await ask("\nwould you like to play again?");
 
   while (playAgain) {
     if (playAgain.trim() === "yes" || playAgain.trim() === "yes") {
@@ -609,11 +614,11 @@ async function play() {
       console.log(welcomeMessage);
       return start();
     } else if (playAgain.trim() === "no" || playAgain.trim() === "n") {
-      console.log("Thanks for playing;");
+      console.log("\nThanks for playing;");
       process.exit();
     } else {
-      console.log("Sorry, I didn't quite get that...");
-      playAgain = await ask("would you like to play again?");
+      console.log("\nSorry, I didn't quite get that...");
+      playAgain = await ask("\nWould you like to play again?");
     }
   }
 }
