@@ -27,10 +27,10 @@ async function start() {
       "\nYou exit the Radio Bean and find yourself at the intersection of Pearl and N.Winooski.  To the east is the hill to UVM and to the south a familiar sight....."
     );
     player.currentRoom = "radio bean"; //brings us to current/starting room
-    return play();
+    return play(); //start game play
   } else {
     console.log("\nSorry, I didn't catch that!");
-    return start();
+    return start(); 
   }
 }
 
@@ -38,12 +38,10 @@ async function start() {
 
 //  start of player object...
 let player = {
-  name: [],
-  inventory: [],
-  currentRoom: [],
-  susPoints: 0, // 
-
-  //moveRoom : function() {}
+  name: [], // not using at this time
+  inventory: [], // what they have to use
+  currentRoom: [], // where the player currently is
+  susPoints: 0 // points for win condition based on food and drink
 };
 
 // Room class. including name, description inventory, directionals and will have actions available later
@@ -71,20 +69,13 @@ class InvObjectsClass {
     this.action = action || []; // action array
     this.susPoints = susPoints;
   }
-  // obUse(userInputAction) {
-  //   if (this.action.includes(userInputAction)) {
-  //     console.log(invObjects.description);
-  //   }
-  // }
 }
 
 //  user actions look table object
-
 let userAction = {
   move: ["go", "walk"],
   use: ["use", "play", "get", "drink", "eat", "give"], //tip? ///also, switching order for now
   take: ["take", "grab", "order"], //added order here for food cart...but it might cause issue of "can't do that later... "
-  // open: ["open", "unlock"],
   drop: ["drop"],
   examine: ["examine"],
   inventory: ["inventory", "i"],
@@ -96,8 +87,6 @@ const water = new InvObjectsClass(
   "water",
   "\nAhhh water. That will be refreshing later",
   "\nAh, a nice refreshing water. Always important to remember on a night out on the town.\nYou've gained 10 sustenance points.",
-  // undefined,
-  // undefined,
   [],
   10
 );
@@ -106,8 +95,6 @@ const shot = new InvObjectsClass(
   "shot",
   "\nshots! shots! shots! What's a night out drinking without shots?",
   "\nDown the hatch.\nAlthough they're good for the soul, they certainly won't help you make it through the night. 1 sustenance point. ",
-  // undefined,
-  // undefined,
   [],
   1
 );
@@ -116,8 +103,6 @@ const map = new InvObjectsClass(
   "map",
   "\nI guess you never know when a map of Burlington could come in handy...?",
   "\nA map is a great way to find your way way around!",
-  // undefined,
-  // undefined,
   [],
   0
 );
@@ -126,8 +111,6 @@ const sparkWater = new InvObjectsClass(
   "sparkling water",
   "\nThe fanciest of the waters, you'll be so glad you have this later.....",
   "\nWow! So fancy! This really hits the spot...\nYou have gained 15 sustenance points.",
-  // undefined,
-  // undefined,
   [],
   15
 );
@@ -136,8 +119,6 @@ const food = new InvObjectsClass(
   "food",
   "\nMMMMMHHHHHHHH, that smells good.....",
   "\nI was absolutely famished! Nothing like a late night street treat to REALLY keep me goin'\nLooks like you really needed that. You gained 20 sustenance points. ",
-  //ndefined,
-  //undefined,
   [],
   20
 );
@@ -146,8 +127,6 @@ const prize = new InvObjectsClass(
   "rise n shiner",
   "\nIt's hot and good and will keep you alive....",
   "\nWith the perfect combo of meat, egg, cheese, and a hashbrown our night is complete.  You gained 50 sustenance points. ",
-  // undefined,
-  // undefined,
   [],
   50
 );
@@ -376,7 +355,6 @@ const rooms = {
 };
 
 // ------------------------------------- PLAN ------------------------------------------------------
-//  need another async (?) play function... that
 //  1)takes a user input
 //  2) sanitizes it into multiple parts..
 // one part will need action = userInputAction
@@ -399,8 +377,6 @@ async function play() {
     if (inputSanitize === "end") {
       process.exit();
 
-      // if user types inventory show inventory
-
       // if user wants to move lets move
     } else if (userAction.move.includes(inputAction)) {
       // conditional directions
@@ -411,7 +387,6 @@ async function play() {
           roomToNorth = rooms[player.currentRoom.toLowerCase()].north;
           player.currentRoom = roomToNorth.name;
           console.log(roomToNorth.description);
-          // console.log(`changing currentRoom to ${roomToNorth.name}`);
         } else {
           console.log("you can't go that way");
         }
@@ -427,7 +402,6 @@ async function play() {
             player.currentRoom = roomToEast.name;
             console.log(roomToEast.description);
           }
-          // console.log(`changing currentRoom to ${roomToEast.name}`);
         } else {
           console.log("you can't go that way");
         }
@@ -438,7 +412,6 @@ async function play() {
           roomToSouth = rooms[player.currentRoom.toLowerCase()].south;
           player.currentRoom = roomToSouth.name;
           console.log(roomToSouth.description);
-          // console.log(`changing currentRoom to ${roomToSouth.name}`);
         } else {
           console.log("you can't go that way");
         }
@@ -449,11 +422,10 @@ async function play() {
           roomToWest = rooms[player.currentRoom.toLowerCase()].west;
           player.currentRoom = roomToWest.name;
           console.log(roomToWest.description);
-          // console.log(`changing currentRoom to ${roomToWest.name}`);
         } else {
           console.log("you can't go that way");
         }
-      } // could add a "i dont understand here" otherwise will keep looping..
+      } 
       //  Actions! USE
     } else if (userAction.use.includes(inputAction)) {
       //PUZZLE/PASS CONDITIONAL
@@ -499,13 +471,6 @@ async function play() {
         let item = invObjects[inputObject];
       if (item.name === "phone") {
         console.log(item.useDescription)
-      //   const result = currentPlayersInventory.filter(
-      //     (object) => invObjects[object.name] === item
-      //   );
-        
-      //   if (result.length > 0) {
-      //     console.log(result[0].useDescription);
-      // } 
     } 
 
       else if (item) { // while the item is true... i.e. exists in our game...
@@ -525,29 +490,21 @@ async function play() {
           // do we want to be able to use something without taking it?
           let currentRoomsInventory =
             rooms[player.currentRoom.toLowerCase()].inventory;
-          // console.log(currentRoomsInventory); // array of items REMOVE
           for (let index = 0; index < currentRoomsInventory.length; index++)
-            // { console.log (invObjects[currentRoomsInventory[index].name].name); // water,shot, food REMOVE
-            // console.log(item.name); // food object REMOVE
             if (
               invObjects[currentRoomsInventory[index].name].name === item.name
             ) {
               console.log(currentRoomsInventory[index].useDescription);
               player.susPoints += currentRoomsInventory[index].susPoints;
-              //  break;
             }
-          // break;
         } 
       } else {
           console.log("\nI don't know what a " + inputObject + " is.");
-          // console.log("Try adding this to your inventory before using it...")
-          // }
         }
         return play();
       }
         // ACTION: TAKE
         // adding to player.inventory
-      
     } else if (userAction.take.includes(inputAction)) {
       // if the action is in the use lookup table
       // look at object
@@ -572,11 +529,6 @@ async function play() {
         );
         player.inventory.push(item);
         // index where object is in room inventory
-        // if (inputObject === "sparkling water") {
-        //   inputObject = "sparkling";
-        // } else if (inputObject === "rise n shiner"){
-        //   inputObject = "rise"
-        // }
         resultIndex = currentRoomsInventory.indexOf(item);
         // if index is greater than -1 .. i.e. there is an index for this item... take it out of room using splice
         if (resultIndex > -1) {
@@ -589,6 +541,7 @@ async function play() {
       console.log("\nI don't know what a " + inputObject + " is.")
     }
     return play();
+    // DROP
     } else if (userAction.drop.includes(inputAction)) {
       // look at object
       let currentPlayersInventory = player.inventory;
@@ -611,11 +564,13 @@ async function play() {
       } else {
         console.log("you can't drop that");
       }
+      // EXAMINE
     } else if (userAction.examine.includes(inputAction)) {
       // print room description
       console.log(rooms[player.currentRoom.toLowerCase()].description);
-      //  maybe also current inventory later?
+      //  maybe also current inventory
       console.log(rooms[player.currentRoom.toLowerCase()].inventory);
+      // INVENTORY
     } else if (userAction.inventory.includes(inputAction)) {
       let currentPlayersInventory = player.inventory;
       // returns empty array if not in room, and array with length one if in room
@@ -625,17 +580,18 @@ async function play() {
         const result = currentPlayersInventory.map((object) => object.name);
         console.log(result);
       }
-      //inventory, suspoints
       console.log("Your current sustenance points are " + player.susPoints);
     } else {
        console.log("\nI don't know how to " + inputAction)
-      // console.log("\nyou can't do that");
     }
     return play();
   }
+  // Win condition based on sus points
   console.log(
     "\nCongratulations on the fun night out!! With Bob by your side and a shiner in hand, you have successfully not blacked out!"
   );
+
+  //  play again?
   let playAgain = await ask("\nwould you like to play again?");
 
   while (playAgain) {
